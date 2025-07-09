@@ -95,7 +95,7 @@ class ProductsController extends Controller
                         Str::random(6),
                         $extension
                     );
-                    $path = $image->storeAs('products', $filename, 'public');
+                    $path = $image->move('products', $filename, 'public');
                     $imagePaths[] = asset('storage/' . $path);
                 }
             }

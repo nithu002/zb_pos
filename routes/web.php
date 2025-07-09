@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\APP\BarcodeContoller;
 use App\Http\Controllers\App\CategoryController;
+use App\Http\Controllers\APP\SubCategoriesController;
 use App\Http\Controllers\App\VariantController;
 use App\Http\Controllers\APP\ProductsController;
 
@@ -54,10 +55,23 @@ Route::post('category/update', [CategoryController::class, 'update'])->name('cat
 
 Route::get('customer-view', [CustomerController::class, 'index'])->name('customer.view');
 Route::post('/customers', [CustomerController::class, 'store'])->name('customers.store');
-Route::get('/customers/{id}', [CustomerController::class, 'show'])->name('customers.show');
+Route::get('/customers', [CustomerController::class, 'show'])->name('customers.show');
+
+// Route::get('/customers/{id}', [CustomerController::class, 'show'])->name('customers.show');
 Route::put('/customers/{id}', [CustomerController::class, 'update'])->name('customers.update');
 Route::delete('/customers/{id}', [CustomerController::class, 'destroy'])->name('customers.destroy');
+   
 
+
+//Categories
+    Route::resource('categories', CategoryController::class);
+    Route::post('get/sub-data', [CategoryController::class,'subData'])->name('get.sub.data');
+    Route::post('category/filterByStatus', [CategoryController::class,'filterByStatus'])->name('category.filterByStatus');
+    Route::post('category/update', [CategoryController::class,'update'])->name('category.update');
+    Route::post('category/destroy', [CategoryController::class,'destroy'])->name('category.destroy');
+
+    //Sub Categories
+    Route::resource('sub-categories', SubCategoriesController::class)->only(['index', 'store', 'update', 'destroy']);
 
 
 // Billers view 

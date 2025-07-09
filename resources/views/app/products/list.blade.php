@@ -42,11 +42,11 @@
                 <ul class="table-top-head">
                     <li>
                         <a id="export-selected-pdf" data-bs-toggle="tooltip" data-bs-placement="top" title="Pdf"><img
-                                src="assets/img/icons/pdf.svg" alt="img"></a>
+                                src="{{ asset('assets/img/icons/pdf.svg') }}" alt="img"></a>
                     </li>
                     <li>
                         <a data-bs-toggle="tooltip" id="export-selected" data-bs-placement="top" title="Excel"><img
-                                src="assets/img/icons/excel.svg" alt="img"></a>
+                                src="{{ asset('assets/img/icons/excel.svg') }}" alt="img"></a>
                     </li>
                     <li>
                         <a href="{{ url()->current() }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Refresh"><i
@@ -267,7 +267,7 @@
         </div> --}}
         <!-- /Import Product -->
 
-        
+
 
         <!-- delete modal -->
         <div class="modal fade" id="delete-modal">

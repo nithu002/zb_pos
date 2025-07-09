@@ -100,7 +100,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-
+                              @foreach($customers as $customer)
                                 <tr>
                                     <td>
                                         <label class="checkboxs">
@@ -114,21 +114,18 @@
                                             <a href="javascript:void(0);" class="avatar avatar-md me-2">
                                                 <img src="assets/img/users/user-33.png" alt="product">
                                             </a>
-                                            <a href="javascript:void(0);">Carl Evans</a>
+                                            <a href="javascript:void(0);">{{ $customer->first_name }} {{ $customer->last_name }}</a>
                                         </div>
                                     </td>
-                                    <td><a href="https://dreamspos.dreamstechnologies.com/cdn-cgi/l/email-protection"
-                                            class="__cf_email__"
-                                            data-cfemail="accfcddec0c9dacdc2dfecc9d4cdc1dcc0c982cfc3c1">[email&#160;protected]</a>
-                                    </td>
-                                    <td>+12163547758</td>
-                                    <td>Germany</td>
+                                    <td>{{ $customer->email }}</td>
+                                    <td>{{ $customer->phone }}</td>
+                                    <td>{{ $customer->city }}</td>
                                     <td><span
                                             class="d-inline-flex align-items-center p-1 pe-2 rounded-1 text-white bg-success fs-10"><i
                                                 class="ti ti-point-filled me-1 fs-11"></i>Active</span></td>
                                     <td class="d-flex">
                                         <div class="edit-delete-action d-flex align-items-center">
-                                            <a class="me-2 p-2 d-flex align-items-center border rounded" href="#"
+                                            <a class="me-2 p-2 d-flex align-items-center border rounded" href=""
                                                 data-bs-toggle="modal" data-bs-target="#view-customer">
                                                 <i data-feather="eye" class="feather-eye"></i>
                                             </a>
@@ -145,50 +142,8 @@
 
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <label class="checkboxs">
-                                            <input type="checkbox">
-                                            <span class="checkmarks"></span>
-                                        </label>
-                                    </td>
-                                    <td>CU002</td>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <a href="javascript:void(0);" class="avatar avatar-md me-2">
-                                                <img src="assets/img/users/user-02.jpg" alt="product">
-                                            </a>
-                                            <a href="javascript:void(0);">Minerva Rameriz</a>
-                                        </div>
-                                    </td>
-                                    <td><a href="https://dreamspos.dreamstechnologies.com/cdn-cgi/l/email-protection"
-                                            class="__cf_email__"
-                                            data-cfemail="592b38343c2b3023193c21383429353c773a3634">[email&#160;protected]</a>
-                                    </td>
-                                    <td>+11367529510 </td>
-                                    <td>Japan</td>
-                                    <td><span
-                                            class="d-inline-flex align-items-center p-1 pe-2 rounded-1 text-white bg-success fs-10"><i
-                                                class="ti ti-point-filled me-1 fs-11"></i>Active</span></td>
-                                    <td class="d-flex">
-                                        <div class="edit-delete-action d-flex align-items-center">
-                                            <a class="me-2 p-2 d-flex align-items-center border rounded" href="#">
-                                                <i data-feather="eye" class="feather-eye"></i>
-                                            </a>
-                                            <a class="me-2 p-2 d-flex align-items-center border rounded" href="#"
-                                                data-bs-toggle="modal" data-bs-target="#edit-customer">
-                                                <i data-feather="edit" class="feather-edit"></i>
-                                            </a>
-                                            <a data-bs-toggle="modal" data-bs-target="#delete-modal"
-                                                class="p-2 d-flex align-items-center border rounded"
-                                                href="javascript:void(0);">
-                                                <i data-feather="trash-2" class="feather-trash-2"></i>
-                                            </a>
-                                        </div>
-
-                                    </td>
-                                </tr>
-
+                               
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -212,6 +167,7 @@
                         </button>
                     </div>
                     <form action="{{ route('customers.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
                         <div class="modal-body">
                             <div class="new-employee-field">
                                 <div class="profile-pic-upload">
@@ -220,7 +176,7 @@
                                     </div>
                                     <div class="mb-3">
                                         <div class="image-upload mb-0">
-                                            <input type="file" name="image">
+                                            <input type="file" name="image" >
                                             <div class="image-uploads">
                                                 <h4>Upload Image</h4>
                                             </div>
@@ -252,7 +208,7 @@
                                 </div>
                                 <div class="col-lg-6 mb-3">
                                     <label class="form-label">City<span class="text-danger ms-1">*</span></label>
-                                    <select class="form-select select2" name="city">
+                                    <select class="form-select" name="city">
                                         <option value="">Select a city</option>
                                         <option value="Ampara">Ampara</option>
                                         <option value="Anuradhapura">Anuradhapura</option>
@@ -283,12 +239,19 @@
                                 </div>
                                 <div class="col-lg-6 mb-3">
                                     <label class="form-label">Province<span class="text-danger ms-1">*</span></label>
-                                    <select class="form-select">
-                                        <option>Select</option>
-                                        <option>California</option>
-                                        <option>New York</option>
-                                        <option>Texas</option>
+                                    <select class="form-select" name="province" required>
+                                        <option value="">Select a province</option>
+                                        <option value="Central">Central</option>
+                                        <option value="Eastern">Eastern</option>
+                                        <option value="Northern">Northern</option>
+                                        <option value="North Central">North Central</option>
+                                        <option value="North Western">North Western</option>
+                                        <option value="Sabaragamuwa">Sabaragamuwa</option>
+                                        <option value="Southern">Southern</option>
+                                        <option value="Uva">Uva</option>
+                                        <option value="Western">Western</option>
                                     </select>
+
                                 </div>
 
                                 <div class="col-lg-12">
@@ -327,8 +290,8 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <form action="" method="POST" enctype="multipart/form-data">
-
+                            <form action="{{Route('customers.show')}}" method="GET" enctype="multipart/form-data">
+                                @csrf
                                 <div class="modal-body">
                                     <div class="new-employee-field">
                                         <div class="profile-pic-upload image-field">
@@ -546,15 +509,5 @@
         <script src="{{ asset('assets/js/bootstrap-datetimepicker.min.js') }}" type="text/javascript"></script>
         <!-- Bootstrap Tagsinput JS -->
         <script src="{{ asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js') }}" type="text/javascript"></script>
-
-        <script>
-            $(document).ready(function() {
-                $('.select2').select2({
-                    placeholder: "Select a city",
-                    allowClear: true,
-                    width: '100%'
-                });
-            });
-        </script>
     @endpush
 </x-app-layout>

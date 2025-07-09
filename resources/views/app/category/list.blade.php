@@ -41,14 +41,6 @@
                 </div>
                 <ul class="table-top-head">
                     <li>
-                        <a id="export-selected-pdf" data-bs-toggle="tooltip" data-bs-placement="top" title="Pdf"><img
-                                src="assets/img/icons/pdf.svg" alt="img"></a>
-                    </li>
-                    <li>
-                        <a data-bs-toggle="tooltip" id="export-selected" data-bs-placement="top" title="Excel"><img
-                                src="assets/img/icons/excel.svg" alt="img"></a>
-                    </li>
-                    <li>
                         <a href="{{ url()->current() }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Refresh"><i
                                 class="ti ti-refresh"></i></a>
                     </li>
@@ -58,8 +50,12 @@
                     </li>
                 </ul>
                 <div class="page-btn">
-					<a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-category"><i class="ti ti-circle-plus me-1"></i>Add Category</a>
-				</div>
+                    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-category"><i
+                            class="ti ti-circle-plus me-1"></i>Add Category</a>
+
+
+
+                </div>
             </div>
 
             <!-- /product list -->
@@ -79,11 +75,13 @@
                             </a>
                             <ul class="dropdown-menu  dropdown-menu-end p-3">
                                 <li>
-									<a href="javascript:void(0);" data-status="1" class="dropdown-category dropdown-item rounded-1">Active</a>
-								</li>
-								<li>
-									<a href="javascript:void(0);" data-status="0" class=" dropdown-category dropdown-item rounded-1">Inactive</a>
-								</li>
+                                    <a href="javascript:void(0);" data-status="1"
+                                        class="dropdown-category dropdown-item rounded-1">Active</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" data-status="0"
+                                        class=" dropdown-category dropdown-item rounded-1">Inactive</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -104,6 +102,7 @@
                                                 <span class="checkmarks"></span>
                                             </label>
                                         </th>
+                                        <th>Image</th>
                                         <th>Category </th>
                                         <th>Category slug</th>
                                         <th>Created On</th>
@@ -125,97 +124,137 @@
 
         {{-- model --}}
 
-		<!-- Add Category -->
-		<div class="modal fade" id="add-category">
-			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
-					<div class="modal-header">
-						<div class="page-title">
-							<h4>Add Category</h4>
-						</div>
-						<button type="button" class="close bg-danger text-white fs-16" data-bs-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div >
-						<div class="modal-body">
-							<div class="mb-3">
-								<label class="form-label">Category<span class="text-danger ms-1">*</span></label>
-								<input type="text" name="category_name" id="category_name"  class="form-control">
-							</div>
+        <!-- Add Category -->
+        <div class="modal fade" id="add-category">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="page-title">
+                            <h4>Add Category</h4>
+                        </div>
+                        <button type="button" class="close bg-danger text-white fs-16" data-bs-dismiss="modal"
+                            aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
 
-							<div class="mb-0">
-								<div class="status-toggle modal-status d-flex justify-content-between align-items-center">
-									<span class="status-label">Status<span class="text-danger ms-1">*</span></span>
-									<input type="checkbox" name="addstatus"  id="user2" class="check" checked="">
-									<label for="user2" class="checktoggle"></label>
-								</div>
-							</div>
-						</div>
-						<div class="modal-footer">
-							<a href="javascript:void(0);" class="btn me-2 btn-secondary" data-bs-dismiss="modal">Cancel</a>
-							<a href="javascript:void(0);" id="submitCategory" class="btn btn-primary">Add Category</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- /Add Category -->
+                    </div>
+                    <div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <div class="add-image-upload">
+                                    <div class="preview-images d-flex align-items-center add-image">
 
-
-        	<!-- Edit Category -->
-		<div class="modal fade" id="edit-category">
-			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
-					<div class="modal-header">
-						<div class="page-title">
-							<h4>Edit Category</h4>
-						</div>
-						<button type="button" class="close bg-danger text-white fs-16" data-bs-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<form action="{{ route('category.update') }}" method="POST">
-						@csrf
-						<div class="modal-body">
-							<div class="mb-3">
-								<label class="form-label">Category<span class="text-danger ms-1">*</span></label>
-								<input type="text" class="form-control" name="category" >
-							</div>
-							<div class="mb-3">
-								<label class="form-label">Category Slug<span class="text-danger ms-1">*</span></label>
-								<input type="text" class="form-control" name="slug" >
-							</div>
-							<div class="mb-0">
-								<div class="status-toggle modal-status d-flex justify-content-between align-items-center">
-									<span class="status-label">Status<span class="text-danger ms-1">*</span></span>
-									<input type="checkbox" id="user3" class="check" checked="">
-									<label for="user3" class="checktoggle"></label>
-								</div>
-							</div>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn me-2 btn-secondary" data-bs-dismiss="modal">Cancel</button>
-							<button type="submit" class="btn btn-primary">Save Changes</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
+                                    </div>
+                                    <div class="new-employee-field">
+                                        <div class="mb-0">
+                                            <div class="image-upload image-upload-two mb-2">
+                                                <input type="file" name="image" id="category_image"
+                                                    accept=".jpeg, .png, .jpg">
+                                                <div class="image-uploads">
+                                                    <h4 class="fs-13 fw-medium">Upload Image</h4>
+                                                </div>
+                                            </div>
+                                            <span>JPEG, PNG up to 2 MB</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Category<span class="text-danger ms-1">*</span></label>
+                                <input type="text" name="category_name" id="category_name" class="form-control">
+                            </div>
+                            <div class="mb-0">
+                                <div class="status-toggle modal-status d-flex justify-content-between align-items-center">
+                                    <span class="status-label">Status<span class="text-danger ms-1">*</span></span>
+                                    <input type="checkbox" name="addstatus" id="user2" class="check"
+                                        checked="">
+                                    <label for="user2" class="checktoggle"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="javascript:void(0);" class="btn me-2 btn-secondary"
+                                data-bs-dismiss="modal">Cancel</a>
+                            <a href="javascript:void(0);" id="submitCategory" class="btn btn-primary">Add Category</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Add Category -->
 
 
+        <!-- Edit Category -->
+        <div class="modal fade" id="edit-category">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="page-title">
+                            <h4>Edit Category</h4>
+                        </div>
+                        <button type="button" class="close bg-danger text-white fs-16" data-bs-dismiss="modal"
+                            aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <div class="add-image-upload">
+                                    <div class="edit_category_image_preview preview-images d-flex align-items-center add-image">
+
+                                    </div>
+                                    <div class="new-employee-field">
+                                        <div class="mb-0">
+                                            <div class="image-upload image-upload-two mb-2">
+                                                <input type="file" name="image" id="edit_category_image"
+                                                    accept=".jpeg, .png, .jpg">
+                                                <div class="image-uploads">
+                                                    <h4 class="fs-13 fw-medium">Change Image</h4>
+                                                </div>
+                                            </div>
+                                            <span>JPEG, PNG up to 2 MB</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <input type="hidden" name="id" id="edit_category_id">
+                                <label class="form-label">Category<span class="text-danger ms-1">*</span></label>
+                                <input type="text" class="form-control" id="edit_category_name" name="category">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Category Slug<span class="text-danger ms-1">*</span></label>
+                                <input type="text" class="form-control" id="edit_category_slug" name="slug">
+                            </div>
+                            <div class="mb-0">
+                                <input type="hidden" id="edit_category_status">
+                                <div class="status-toggle modal-status d-flex justify-content-between align-items-center">
+                                    <span class="status-label">Status<span class="text-danger ms-1">*</span></span>
+                                    <input name="status" type="checkbox" id="user3" class="check">
+                                    <label for="user3" class="checktoggle"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn me-2 btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" id="editCategory" class="btn btn-primary">Save Changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- delete modal -->
         <div class="modal fade" id="delete-modal">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="page-wrapper-new p-0">
-                        <form action="{{ route('products.destroy') }}" method="POST">
+                        <form action="{{ route('category.destroy') }}" method="POST">
                             @csrf
                             <div class="content p-5 px-3 text-center">
                                 <span class="rounded-circle d-inline-flex p-2 bg-danger-transparent mb-2"><i
                                         class="ti ti-trash fs-24 text-danger"></i></span>
-
                                 <input type="hidden" name="id" id="delete-product-id">
                                 <h4 class="fs-20 text-gray-9 fw-bold mb-2 mt-1">Delete Product</h4>
                                 <p class="text-gray-6 mb-0 fs-16">Are you sure you want to delete product?</p>
@@ -236,9 +275,15 @@
 
 
 
-
-
     @push('js')
+        <script>
+            const routes = {
+                categoriesStore: @json(route('categories.store')),
+                categoriesUpdate: @json(route('category.update')),
+                categoriesFilter: @json(route('category.filterByStatus')),
+            };
+            const csrfToken = '{{ csrf_token() }}';
+        </script>
         <!-- Select2 JS -->
         <script src="{{ asset('assets/plugins/select2/js/select2.min.js') }}" type="text/javascript"></script>
 
@@ -246,130 +291,44 @@
         <script src="{{ asset('assets/js/bootstrap-datetimepicker.min.js') }}" type="text/javascript"></script>
         <!-- Bootstrap Tagsinput JS -->
         <script src="{{ asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js') }}" type="text/javascript"></script>
+        <!-- Customize JS for catgeory page -->
+        <script src="{{ asset('assets/js/category.js') }}" type="text/javascript"></script>
 
         <script>
-            const routes = {
-                    categoriesStore: @json(route('categories.store')),
-                };
-            const csrfToken = '{{ csrf_token() }}';
-        </script>
-        <script>
-            $(document).on('click', '.dropdown-menu .dropdown-category', function() {
+            // Single image preview
+            $(document).on('change', '.image-upload-two input[type="file"]', function(e) {
+                const file = e.target.files[0]; // Only take the first file
+                const $previewArea = $(this).closest('.add-image-upload').find('.preview-images');
 
-                const status   = this.dataset.status;
+                // Clear previous previews
+                $previewArea.empty();
 
-                // Show loader and dull table
-                $('#product-loader').show();
-                $('#product-table').addClass('dull');
+                if (!file) return; // No file selected
 
-                $.ajax({
-                    url: '{{ route('category.filterByStatus') }}',
-                    type: 'POST',
-                    data: {
-                        status: status,
-                        _token: '{{ csrf_token() }}'
-                    },
-                    success: function(response) {
-                        $('#product-table-body').html(response.html);
-                        toastr.info('Review the list of categories that have been found.');
-                    },
-                    error: function() {
-                        toastr.error('Failed to load categories for this status.');
-                    },
-                    complete: function() {
-                        // Hide loader and restore table
-                        $('#product-loader').hide();
-                        $('#product-table').removeClass('dull');
-                    }
-                });
-            });
-        </script>
-        <script>
-            $(function() {
-                let deleteProductId = null;
-
-                // When delete button is clicked, set the product ID
-                $(document).on('click', '.delete-product-btn', function() {
-                    deleteProductId = $(this).data('id');
-                    $('#delete-product-id').val(deleteProductId);
-                });
-
-
-            });
-        </script>
-        <script>
-            $(document).ready(function() {
-                function submitExportForm(route) {
-                    var selectedIds = [];
-                    $(".row-checkbox:checked").each(function() {
-                        selectedIds.push($(this).val());
-                    });
-
-                    if (selectedIds.length === 0) {
-                        toastr.warning("Please select at least one product to export.");
-                        return;
-                    }
-
-                    var form = $('<form>', {
-                        action: route,
-                        method: 'POST'
-                    });
-
-                    form.append('@csrf');
-
-                    selectedIds.forEach(function(id) {
-                        form.append($('<input>', {
-                            type: 'hidden',
-                            name: 'ids[]',
-                            value: id
-                        }));
-                    });
-
-                    $('body').append(form);
-                    form.submit();
+                if (!file.type.startsWith('image/')) {
+                    toastr.error('Only image files are allowed!');
+                    return;
                 }
 
-                $("#export-selected").on("click", function() {
-                    submitExportForm('{{ route('products.exportSelected') }}');
-                });
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    const imgHtml = `
+            <div class="phone-img uploaded" style="position:relative; display:inline-block; margin:5px;">
+                <img src="${evt.target.result}" alt="image" style="max-width:110px; max-height:110px; border-radius:8px; box-shadow:0 2px 8px #eee;">
+                <a href="javascript:void(0);" class="remove-product" style="position:absolute;top:5px;right:5px;">
+                    <span style="background:#f33;color:#fff;border-radius:50%;padding:2px 6px;font-weight:bold;font-size:16px;line-height:1;">×</span>
+                </a>
+            </div>
+        `;
+                    $previewArea.html(imgHtml);
+                    if (window.feather) feather.replace();
+                };
+                reader.readAsDataURL(file);
+            });
 
-                $("#export-selected-pdf").on("click", function() {
-                    submitExportForm('{{ route('products.exportSelectedPdf') }}');
-                });
-
-                // Save category
-                $('#submitCategory').on('click', function () {
-                    var $btn = $(this);
-                    var category = $('#category_name').val();
-                    const checkbox = document.querySelector('input[name="addstatus"]');
-                    // Get value: 1 if checked, 0 if unchecked
-                    const statusValue = checkbox.checked ? 1 : 0;
-
-                    if (!category) {
-                        toastr.warning('Please enter a category name.');
-                        return;
-                    }
-                    $btn.prop('disabled', true).html('<span class="spinner-border spinner-border-sm me-1"></span> Saving...');
-                    $.ajax({
-                        url: routes.categoriesStore,
-                        type: 'POST',
-                        data: {
-                            category: category,
-                            status: statusValue,
-                            _token: csrfToken
-                        },
-                        success: function (response) {
-                            toastr.success('Category added!');
-                            // refresh page
-                            location.reload();
-                        },
-                        error: function (xhr) {
-                            toastr.error('Error adding category.');
-                            $btn.prop('disabled', false).html('Try Again');
-                        }
-                    });
-                });
-
+            // Remove image preview
+            $(document).on('click', '.remove-product', function() {
+                $(this).closest('.phone-img.uploaded').remove();
             });
         </script>
     @endpush
