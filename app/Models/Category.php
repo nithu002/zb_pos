@@ -20,4 +20,15 @@ class Category extends Model
             ]
         ];
     }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'category','id');
+    }
+
+    public function children()
+    {
+        return $this->hasMany(SubCategory::class, 'category_id');
+    }
+
 }

@@ -89,7 +89,7 @@
 								<li><a href="{{ route('expired.products') }}"><i class="ti ti-progress-alert fs-16 me-2"></i><span>Expired Products</span></a></li>
 								<li><a href="{{ route('low-stock.product') }}"><i class="ti ti-trending-up-2 fs-16 me-2"></i><span>Low Stocks</span></a></li>
 								<li><a href="{{ route('categories.index') }}"><i class="ti ti-list-details fs-16 me-2"></i><span>Category</span></a></li>
-								<li><a href="sub-categories.html"><i class="ti ti-carousel-vertical fs-16 me-2"></i><span>Sub Category</span></a></li>
+								<li><a href="{{ route('sub-categories.index') }}"><i class="ti ti-carousel-vertical fs-16 me-2"></i><span>Sub Category</span></a></li>
 								<li><a href="brand-list.html"><i class="ti ti-triangles fs-16 me-2"></i><span>Brands</span></a></li>
 								<li><a href="units.html"><i class="ti ti-brand-unity fs-16 me-2"></i><span>Units</span></a></li>
 								<li><a href="varriant-attributes.html"><i class="ti ti-checklist fs-16 me-2"></i><span>Variant Attributes</span></a></li>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\APP\BarcodeContoller;
 use App\Http\Controllers\App\CategoryController;
+use App\Http\Controllers\APP\SubCategoriesController;
 use App\Http\Controllers\App\VariantController;
 use App\Http\Controllers\APP\ProductsController;
 use Illuminate\Support\Facades\Route;
@@ -42,7 +43,10 @@ Route::get('/', function () {
     Route::post('get/sub-data', [CategoryController::class,'subData'])->name('get.sub.data');
     Route::post('category/filterByStatus', [CategoryController::class,'filterByStatus'])->name('category.filterByStatus');
     Route::post('category/update', [CategoryController::class,'update'])->name('category.update');
+    Route::post('category/destroy', [CategoryController::class,'destroy'])->name('category.destroy');
 
+    //Sub Categories
+    Route::resource('sub-categories', SubCategoriesController::class)->only(['index', 'store', 'update', 'destroy']);
 
 
     //Variant Routes
