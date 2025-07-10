@@ -51,35 +51,39 @@ Route::post('category/update', [CategoryController::class, 'update'])->name('cat
 //     return view('customer.view');
 // });
 
-// Customer view 
+// Customer view
 
 Route::get('customer-view', [CustomerController::class, 'index'])->name('customer.view');
 Route::post('/customers', [CustomerController::class, 'store'])->name('customers.store');
-Route::get('/customers', [CustomerController::class, 'show'])->name('customers.show');
+// Route::get('/customers', [CustomerController::class, 'show'])->name('customers.show');
 
-// Route::get('/customers/{id}', [CustomerController::class, 'show'])->name('customers.show');
+Route::get('/customers/{id}', [CustomerController::class, 'show'])->name('customers.show');
 Route::put('/customers/{id}', [CustomerController::class, 'update'])->name('customers.update');
 Route::delete('/customers/{id}', [CustomerController::class, 'destroy'])->name('customers.destroy');
-   
+
+// Download pdf
+Route::post('/customers/download-pdf', [CustomerController::class, 'downloadPdf'])->name('customers.downloadPdf');
+Route::post('/customers/download-excel', [CustomerController::class, 'downloadExcel'])->name('customers.downloadExcel');;
+
 
 
 //Categories
-    Route::resource('categories', CategoryController::class);
-    Route::post('get/sub-data', [CategoryController::class,'subData'])->name('get.sub.data');
-    Route::post('category/filterByStatus', [CategoryController::class,'filterByStatus'])->name('category.filterByStatus');
-    Route::post('category/update', [CategoryController::class,'update'])->name('category.update');
-    Route::post('category/destroy', [CategoryController::class,'destroy'])->name('category.destroy');
+Route::resource('categories', CategoryController::class);
+Route::post('get/sub-data', [CategoryController::class, 'subData'])->name('get.sub.data');
+Route::post('category/filterByStatus', [CategoryController::class, 'filterByStatus'])->name('category.filterByStatus');
+Route::post('category/update', [CategoryController::class, 'update'])->name('category.update');
+Route::post('category/destroy', [CategoryController::class, 'destroy'])->name('category.destroy');
 
-    //Sub Categories
-    Route::resource('sub-categories', SubCategoriesController::class)->only(['index', 'store', 'update', 'destroy']);
+//Sub Categories
+Route::resource('sub-categories', SubCategoriesController::class)->only(['index', 'store', 'update', 'destroy']);
 
 
-// Billers view 
+// Billers view
 Route::get('supplier-view', function () {
     return view('supplier.view');
 });
 
-// Location view 
+// Location view
 Route::get('location-view', function () {
     return view('location.view');
 });
