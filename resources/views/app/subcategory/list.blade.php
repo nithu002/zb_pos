@@ -72,9 +72,9 @@
                                 Category
                             </a>
                             <ul class="dropdown-menu  dropdown-menu-end p-3">
-                                @forelse ($catgeories as $cat)
+                                @forelse ($categories as $cat)
                                     <li>
-                                        <a href="javascript:void(0);"
+                                        <a href="javascript:void(0);" data-category="{{ $cat->id }}"
                                             class="dropdown-item dropdown-category rounded-1">{{ $cat->category }}</a>
                                     </li>
                                 @empty
@@ -94,11 +94,11 @@
                             <ul class="dropdown-menu  dropdown-menu-end p-3">
                                 <li>
                                     <a href="javascript:void(0);" data-status="1"
-                                        class="dropdown-category dropdown-item rounded-1">Active</a>
+                                        class="dropdown-status dropdown-item rounded-1">Active</a>
                                 </li>
                                 <li>
                                     <a href="javascript:void(0);" data-status="0"
-                                        class=" dropdown-category dropdown-item rounded-1">Inactive</a>
+                                        class=" dropdown-status dropdown-item rounded-1">Inactive</a>
                                 </li>
                             </ul>
                         </div>
@@ -120,7 +120,6 @@
                                                 <span class="checkmarks"></span>
                                             </label>
                                         </th>
-                                        	<th>Image</th>
 											<th>Sub Category</th>
 											<th>Category</th>
 											<th>Status</th>
@@ -152,52 +151,28 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="https://dreamspos.dreamstechnologies.com/html/template/sub-categories.html">
+                    <form action="{{ route('sub-categories.store') }}" method="POST">
+                        @csrf
                         <div class="modal-body">
                             <div class="mb-3">
-                                <div class="add-image-upload">
-                                    <div class="add-image">
-                                        <span class="fw-normal"><i data-feather="plus-circle" class="plus-down-add"></i> Add
-                                            Image</span>
-                                    </div>
-                                    <div class="new-employee-field">
-                                        <div class="mb-0">
-                                            <div class="image-upload mb-2">
-                                                <input type="file">
-                                                <div class="image-uploads">
-                                                    <h4 class="fs-13 fw-medium">Upload Image</h4>
-                                                </div>
-                                            </div>
-                                            <span>JPEG, PNG up to 2 MB</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3">
                                 <label class="form-label">Category<span class="text-danger ms-1">*</span></label>
-                                <select class="select">
-                                    <option>Select</option>
-                                    <option>Computers</option>
-                                    <option>Shoe</option>
-                                    <option>Electronics</option>
-                                </select>
+                                <Select required name="cat_id" class="form-select">
+                                    <option value="" disabled selected>Select Category</option>
+                                    @forelse ($categories as $cat)
+                                        <option value="{{ $cat->id }}">{{ $cat->category }}</option>
+                                    @empty
+                                        <option value="" disabled>Data Not Found</option>
+                                    @endforelse
+                                </Select>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Sub Category<span class="text-danger ms-1">*</span></label>
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Category Code<span class="text-danger ms-1">*</span></label>
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Description<span class="text-danger ms-1">*</span></label>
-                                <textarea class="form-control"></textarea>
+                                <input type="text" required name="subcategory" class="form-control">
                             </div>
                             <div class="mb-0">
                                 <div class="status-toggle modal-status d-flex justify-content-between align-items-center">
                                     <span class="status-label">Status</span>
-                                    <input type="checkbox" id="user2" class="check" checked="">
+                                    <input name="status" type="checkbox" id="user2" class="check" checked="">
                                     <label for="user2" class="checktoggle"></label>
                                 </div>
                             </div>
@@ -225,55 +200,30 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="https://dreamspos.dreamstechnologies.com/html/template/sub-categories.html">
+                    <form action="{{ route('sub-categories.update') }}" method="POST" >
+                        @csrf
                         <div class="modal-body">
-                            <div class="mb-3">
-                                <div class="add-image-upload">
-                                    <div class="add-image p-1 border-solid">
-
-                                        <img src="assets/img/products/laptop.png" alt="image">
-                                        <a href="javascript:void(0);"><i data-feather="x"
-                                                class="x-square-add image-close remove-product fs-12 text-white bg-danger rounded-1"></i></a>
-
-                                    </div>
-                                    <div class="new-employee-field">
-                                        <div class="mb-0">
-                                            <div class="image-upload mb-2">
-                                                <input type="file">
-                                                <div class="image-uploads">
-                                                    <h4 class="fs-13 fw-medium">Change Image</h4>
-                                                </div>
-                                            </div>
-                                            <span>JPEG, PNG up to 2 MB</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <input type="hidden" name="id"  id="edit_sub_id">
                             <div class="mb-3">
                                 <label class="form-label">Category<span class="text-danger ms-1">*</span></label>
-                                <select class="select">
-                                    <option>Select</option>
-                                    <option selected>Computers</option>
-                                    <option>Shoe</option>
-                                    <option>Electronics</option>
-                                </select>
+                                <Select required name="cat_id" id="edit_category_name" class="form-select">
+                                    <option value="" disabled selected>Select Category</option>
+                                    @forelse ($categories as $cat)
+                                        <option value="{{ $cat->id }}">{{ $cat->category }}</option>
+                                    @empty
+                                        <option value="" disabled>Data Not Found</option>
+                                    @endforelse
+                                </Select>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Sub Category<span class="text-danger ms-1">*</span></label>
-                                <input type="text" class="form-control" value="Laptop">
+                                <input type="text" class="form-control" required id="edit_subcategory" name="subcategory">
                             </div>
-                            <div class="mb-3">
-                                <label class="form-label">Category Code<span class="text-danger ms-1">*</span></label>
-                                <input type="text" class="form-control" value="CT001">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Description<span class="text-danger ms-1">*</span></label>
-                                <textarea class="form-control">Efficient Productivity</textarea>
-                            </div>
+
                             <div class="mb-0">
                                 <div class="status-toggle modal-status d-flex justify-content-between align-items-center">
                                     <span class="status-label">Status</span>
-                                    <input type="checkbox" id="user3" class="check" checked="">
+                                    <input type="checkbox" name="status" id="user3" class="check" checked="">
                                     <label for="user3" class="checktoggle"></label>
                                 </div>
                             </div>
@@ -291,20 +241,24 @@
         <div class="modal fade" id="delete-modal">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
-                    <div class="page-wrapper-new p-0">
-                        <div class="content p-5 px-3 text-center">
-                            <span class="rounded-circle d-inline-flex p-2 bg-danger-transparent mb-2"><i
-                                    class="ti ti-trash fs-24 text-danger"></i></span>
-                            <h4 class="fs-20 fw-bold mb-2 mt-1">Delete Sub Category</h4>
-                            <p class="mb-0 fs-16">Are you sure you want to delete sub category?</p>
-                            <div class="modal-footer-btn mt-3 d-flex justify-content-center">
-                                <button type="button" class="btn me-2 btn-secondary fs-13 fw-medium p-2 px-3 shadow-none"
-                                    data-bs-dismiss="modal">Cancel</button>
-                                <button type="submit" class="btn btn-primary fs-13 fw-medium p-2 px-3">Yes
-                                    Delete</button>
+                    <form action="{{ route('subCategories.destroy') }}" method="POST">
+                        @csrf
+                        <div class="page-wrapper-new p-0">
+                            <div class="content p-5 px-3 text-center">
+                                <span class="rounded-circle d-inline-flex p-2 bg-danger-transparent mb-2"><i
+                                        class="ti ti-trash fs-24 text-danger"></i></span>
+                                <h4 class="fs-20 fw-bold mb-2 mt-1">Delete Sub Category</h4>
+                                <p class="mb-0 fs-16">Are you sure you want to delete sub category?</p>
+                                <div class="modal-footer-btn mt-3 d-flex justify-content-center">
+                                    <button type="button" class="btn me-2 btn-secondary fs-13 fw-medium p-2 px-3 shadow-none"
+                                        data-bs-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-primary fs-13 fw-medium p-2 px-3">Yes
+                                        Delete</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
+
                 </div>
             </div>
         </div>
@@ -334,19 +288,33 @@
 
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                const editButtons = document.querySelectorAll('.edit-category-btn');
+                const editButtons = document.querySelectorAll('.edit-sub-category-btn');
                 editButtons.forEach(btn => {
                     btn.addEventListener('click', function() {
-                        const id = this.dataset.id;
-                        const slug = this.dataset.slug;
-                        const status = this.dataset.status;
-                        const category = this.dataset.name;
+                        const id = $(this).data('id');
+                        const name = $(this).data('name');
+                        const category = $(this).data('category-name');
+                        const category_id = $(this).data('category-id');
+                        const status = $(this).data('status');
 
                         // Fill modal fields
-                        document.getElementById('edit_category_id').value = id;
-                        document.getElementById('edit_category_slug').value = slug;
-                        document.getElementById('edit_category_name').value = category;
+                        document.getElementById('edit_sub_id').value = id;
+                        document.getElementById('edit_subcategory').value = name;
 
+
+                        // Set the category dropdown selected value
+                        const select = $('#edit_category_name');
+
+                        // First remove any existing selected option with that value
+                        select.find('option').removeAttr('selected');
+
+                        // Set if option exists
+                        if (select.find(`option[value="${category_id}"]`).length) {
+                            select.val(category_id);
+                        } else {
+                            // Add the option dynamically if not exists
+                            select.append(`<option value="${category_id}" selected>${category_name}</option>`);
+                        }
                         // Set checkbox state
                         const checkbox = document.getElementById('user3');
                         checkbox.checked = (status == 1);
@@ -367,15 +335,45 @@
 
         <script>
             $(document).on('click', '.dropdown-menu .dropdown-category', function() {
-
-                const status = this.dataset.status;
-
+                // Get the status from the clicked item
+                const id = $(this).data('category');
                 // Show loader and dull table
                 $('#product-loader').show();
                 $('#product-table').addClass('dull');
 
                 $.ajax({
-                    url: '{{ route('category.filterByStatus') }}',
+                    url: '{{ route('subCategory.filterByCategory') }}',
+                    type: 'POST',
+                    data: {
+                        id: id,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        $('#product-table-body').html(response.html);
+                        toastr.info('Review the list of categories that have been found.');
+                    },
+                    error: function() {
+                        toastr.error('Failed to load categories for this status.');
+                    },
+                    complete: function() {
+                        // Hide loader and restore table
+                        $('#product-loader').hide();
+                        $('#product-table').removeClass('dull');
+                    }
+                });
+            });
+        </script>
+
+        <script>
+            $(document).on('click', '.dropdown-menu .dropdown-status', function() {
+                // Get the status from the clicked item
+                const status = $(this).data('status');
+                // Show loader and dull table
+                $('#product-loader').show();
+                $('#product-table').addClass('dull');
+
+                $.ajax({
+                    url: '{{ route('subCategory.filterByStatus') }}',
                     type: 'POST',
                     data: {
                         status: status,

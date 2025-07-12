@@ -104,12 +104,16 @@ class CategoryController extends Controller
     public function update(Request $request)
     {
 
-        // return $request->all();
+      //   return $request->all();
         //
         $category = Category::find($request->id);
         $category->category = $request->category;
         $category->slug = $request->slug;
-        $category->status = $request->status ?? 1;
+        if($request->status == 'on') {
+            $category->status =  1;
+        }else{
+            $category->status = 0;
+        }
         if ($request->hasFile('image')) {
             $image = $request->file('image');
 
@@ -133,13 +137,9 @@ class CategoryController extends Controller
                 $category->images = asset('storage/categories/' . $filename);
             }
         }
-        $category->save();
-        return response()->json([
-            'status' => 'success',
-            'id' => $category->id,
-            'category' => $category->category,
-            'slug' => $category->slug,
-        ]);
+        if($category->save()){
+            return redirect()->back()->with('success','Category is updated');
+        }
 
 
     }
