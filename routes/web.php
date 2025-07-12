@@ -61,13 +61,10 @@ Route::get('/customers/{id}', [CustomerController::class, 'show'])->name('custom
 Route::put('/customers/{id}', [CustomerController::class, 'update'])->name('customers.update');
 Route::delete('/customers/{id}', [CustomerController::class, 'destroy'])->name('customers.destroy');
 
-<<<<<<< HEAD
 // Download pdf
 Route::post('/customers/download-pdf', [CustomerController::class, 'downloadPdf'])->name('customers.downloadPdf');
 Route::post('/customers/download-excel', [CustomerController::class, 'downloadExcel'])->name('customers.downloadExcel');;
 
-=======
->>>>>>> ee356b233660b44def725d4c9a699afdaf092c1e
 
 
 //Categories
