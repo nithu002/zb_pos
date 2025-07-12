@@ -201,7 +201,12 @@
                         <div class="modal-body">
                             <div class="mb-3">
                                 <div class="add-image-upload">
+
                                     <div id="edit_category_image_preview" class=" preview-images d-flex align-items-center add-image">
+
+                                    <div
+                                        class="edit_category_image_preview preview-images d-flex align-items-center add-image">
+
 
                                     </div>
                                     <div class="new-employee-field">

@@ -47,19 +47,18 @@ Route::post('category/filterByStatus', [CategoryController::class, 'filterByStat
 Route::post('category/update', [CategoryController::class, 'update'])->name('category.update');
 
 
-// Route::get('customer-view', function () {
-//     return view('customer.view');
-// });
-
 // Customer view
-
 Route::get('customer-view', [CustomerController::class, 'index'])->name('customer.view');
 Route::post('/customers', [CustomerController::class, 'store'])->name('customers.store');
-Route::get('/customers', [CustomerController::class, 'show'])->name('customers.show');
+// Route::get('/customers', [CustomerController::class, 'show'])->name('customers.show');
 
-// Route::get('/customers/{id}', [CustomerController::class, 'show'])->name('customers.show');
+Route::get('/customers/{id}', [CustomerController::class, 'show'])->name('customers.show');
 Route::put('/customers/{id}', [CustomerController::class, 'update'])->name('customers.update');
 Route::delete('/customers/{id}', [CustomerController::class, 'destroy'])->name('customers.destroy');
+
+// Download pdf
+Route::post('/customers/download-pdf', [CustomerController::class, 'downloadPdf'])->name('customers.downloadPdf');
+Route::post('/customers/download-excel', [CustomerController::class, 'downloadExcel'])->name('customers.downloadExcel');;
 
 
 
@@ -71,26 +70,10 @@ Route::post('category/update', [CategoryController::class, 'update'])->name('cat
 Route::post('category/destroy', [CategoryController::class, 'destroy'])->name('category.destroy');
 
 //Sub Categories
-Route::resource('sub-categories', SubCategoriesController::class)->only(['index', 'store', 'destroy']);
-Route::post('sub-categories/update', [SubCategoriesController::class, 'update'])->name('sub-categories.update');
-Route::post('sub-categories/filterByCategory', [SubCategoriesController::class, 'filterByCategory'])->name('subCategory.filterByCategory');
-Route::post('sub-categories/filterByStatus', [SubCategoriesController::class, 'filterByStatus'])->name('subCategory.filterByStatus');
-
-// sub-categories delete
-Route::post('sub-categories/delete', [SubCategoriesController::class, 'destroy'])->name('sub-categories.destroy');
+Route::resource('sub-categories', SubCategoriesController::class)->only(['index', 'store', 'update', 'destroy']);
 
 
 
-
-// Billers view
-Route::get('supplier-view', function () {
-    return view('supplier.view');
-});
-
-// Location view
-Route::get('location-view', function () {
-    return view('location.view');
-});
 
 
 
