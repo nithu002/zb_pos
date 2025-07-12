@@ -126,10 +126,19 @@
                                         </td>
                                         <td>{{ $customer->email }}</td>
                                         <td>{{ $customer->phone }}</td>
-                                        <td>{{ $customer->city }}</td>
-                                        <td><span
-                                                class="d-inline-flex align-items-center p-1 pe-2 rounded-1 text-white bg-success fs-10"><i
-                                                    class="ti ti-point-filled me-1 fs-11"></i>Active</span></td>
+                                        <td>{{ $customer->province }}</td>
+                                        <td>
+                                            @if ($customer->status)
+                                                <span
+                                                    class="d-inline-flex align-items-center p-1 pe-2 rounded-1 text-white bg-success fs-10"><i
+                                                        class="ti ti-point-filled me-1 fs-11"></i>Active</span>
+                                            @else
+                                                <span
+                                                    class="d-inline-flex align-items-center p-1 pe-2 rounded-1 text-white bg-danger fs-10"><i
+                                                        class="ti ti-point-filled me-1 fs-11"></i>Not Active</span>
+                                            @endif
+                                        </td>
+
                                         <td class="d-flex">
                                             <div class="edit-delete-action d-flex align-items-center">
                                                 <a href="javascript:void(0);"
@@ -212,23 +221,23 @@
                                 </div>
                                 <div class="col-lg-6 mb-3">
                                     <label class="form-label">Last Name<span class="text-danger ms-1">*</span></label>
-                                    <input type="text" class="form-control" name="last_name" required>
+                                    <input type="text" class="form-control" name="last_name">
                                 </div>
                                 <div class="col-lg-12 mb-3">
                                     <label class="form-label">Email<span class="text-danger ms-1">*</span></label>
-                                    <input type="email" class="form-control" name="email" required>
+                                    <input type="email" class="form-control" name="email">
                                 </div>
                                 <div class="col-lg-12 mb-3">
                                     <label class="form-label">Phone<span class="text-danger ms-1">*</span></label>
-                                    <input type="number" class="form-control" name="phone" required>
+                                    <input type="number" class="form-control" name="phone">
                                 </div>
                                 <div class="col-lg-12 mb-3">
                                     <label class="form-label">Address<span class="text-danger ms-1">*</span></label>
-                                    <input type="text" class="form-control" name="address" required>
+                                    <input type="text" class="form-control" name="address">
                                 </div>
                                 <div class="col-lg-6 mb-3">
                                     <label class="form-label">City<span class="text-danger ms-1">*</span></label>
-                                    <select class="form-select" name="city" required>
+                                    <select class="form-select" name="city">
                                         <option value="">Select a city</option>
                                         <option value="Ampara">Ampara</option>
                                         <option value="Anuradhapura">Anuradhapura</option>
@@ -259,7 +268,7 @@
                                 </div>
                                 <div class="col-lg-6 mb-3">
                                     <label class="form-label">Province<span class="text-danger ms-1">*</span></label>
-                                    <select class="form-select" name="province" required>
+                                    <select class="form-select" name="province">
                                         <option value="">Select a province</option>
                                         <option value="Central">Central</option>
                                         <option value="Eastern">Eastern</option>
@@ -277,12 +286,17 @@
                                 <div class="col-lg-12">
                                     <div
                                         class="status-toggle modal-status d-flex justify-content-between align-items-center">
-                                        <span class="status-label">Status<span class="text-danger ms-1">*</span></span>
-                                        <input type="checkbox" name="addstatus" id="user1" class="check"
-                                            checked="">
-                                        <label for="user1" class="checktoggle"></label>
+                                        <span class="status-label">Status <span class="text-danger ms-1">*</span></span>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <input type="checkbox" name="addstatus" id="user1" class="check"
+                                                {{ old('addstatus', true) ? 'checked' : '' }}>
+                                            <label for="user1" class="checktoggle"></label>
+                                            <span id="status-text" class="badge bg-success">Active</span>
+                                        </div>
                                     </div>
                                 </div>
+
+
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -415,7 +429,7 @@
                                         <div class="col-lg-6 mb-3">
                                             <label class="form-label">First Name</label>
                                             <input type="text" name="first_name" id="editCustomerFirst"
-                                                class="form-control">
+                                                class="form-control" required>
                                         </div>
                                         <div class="col-lg-6 mb-3">
                                             <label class="form-label">Last Name</label>
@@ -429,7 +443,7 @@
                                         </div>
                                         <div class="col-lg-12 mb-3">
                                             <label class="form-label">Phone</label>
-                                            <input type="tel" name="phone" id="editCustomerPhone"
+                                            <input type="number" name="phone" id="editCustomerPhone"
                                                 class="form-control">
                                         </div>
                                         <div class="col-lg-12 mb-3">
@@ -439,7 +453,7 @@
                                         </div>
                                         <div class="col-lg-6 mb-3">
                                             <label class="form-label">City</label>
-                                            <select class="form-select" name="city" required id="editCustomerCity">
+                                            <select class="form-select" name="city" id="editCustomerCity">
                                                 <option value="">Select a city</option>
                                                 <option value="Ampara">Ampara</option>
                                                 <option value="Anuradhapura">Anuradhapura</option>
@@ -472,8 +486,7 @@
                                         </div>
                                         <div class="col-lg-6 mb-3">
                                             <label class="form-label">Province</label>
-                                            <select class="form-select" name="province" id="editCustomerProvince"
-                                                required>
+                                            <select class="form-select" name="province" id="editCustomerProvince">
                                                 <option value="">Select a province</option>
                                                 <option value="Central">Central</option>
                                                 <option value="Eastern">Eastern</option>
@@ -488,8 +501,25 @@
                                             {{-- <input type="text" name="province" id="editCustomerProvince"
                                                 class="form-control"> --}}
                                         </div>
+                                        <div class="col-lg-12">
+                                            <div
+                                                class="status-toggle modal-status d-flex justify-content-between align-items-center">
+                                                <span class="status-label">Status <span
+                                                        class="text-danger ms-1">*</span></span>
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <input type="checkbox" name="addstatus" id="edit-status-checkbox"
+                                                        class="check">
+                                                    <label for="edit-status-checkbox" class="checktoggle"></label>
+                                                    <span id="edit-status-text" class="badge">Active</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
                                     </div>
+
                                 </div>
+
 
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
@@ -608,25 +638,37 @@
         {{-- /View end --}}
 
         {{-- Edit details --}}
-        <script>
-            // This will give something like: http://localhost/yourproject/public/customers/
-            var routeBase = "{{ route('customers.show', ['id' => 'ID_REPLACE']) }}";
-        </script>
 
         <script>
+            // Define route base for fetching customer
+            var routeBase = "{{ route('customers.show', ['id' => 'ID_REPLACE']) }}";
+
             $(document).ready(function() {
+                // Show selected image in preview circle
+                $('#editCustomerImageFile').on('change', function(e) {
+                    const file = e.target.files[0];
+
+                    if (!file || !file.type.startsWith('image/')) {
+                        toastr.error('Only image files are allowed!');
+                        return;
+                    }
+
+                    const reader = new FileReader();
+                    reader.onload = function(evt) {
+                        $('#editCustomerImage').attr('src', evt.target.result);
+                    };
+                    reader.readAsDataURL(file);
+                });
+
                 $('.EditCustomerBtn').on('click', function() {
                     var customerId = $(this).data('id');
-
-                    // Replace placeholder with actual ID
                     var fetchUrl = routeBase.replace('ID_REPLACE', customerId);
-
 
                     $.ajax({
                         url: fetchUrl,
                         method: 'GET',
                         success: function(response) {
-                            // Set values for input fields
+                            // Set values for form fields
                             $('#editCustomerFirst').val(response.first_name);
                             $('#editCustomerLast').val(response.last_name);
                             $('#editCustomerEmail').val(response.email);
@@ -635,15 +677,7 @@
                             $('#editCustomerCity').val(response.city);
                             $('#editCustomerProvince').val(response.province);
 
-                            // Set profile image if available
-                            // if (response.image) {
-                            //     $('#viewCustomerImage').attr('src', '/storage/customers/' + response
-                            //         .image);
-                            // } else {
-                            //     $('#viewCustomerImage').attr('src',
-                            //         '/assets/img/users/user-41.jpg'); // fallback image
-                            // }
-                            // Set image
+                            // Set image preview
                             if (response.image) {
                                 $('#editCustomerImage').attr('src', response.image);
                             } else {
@@ -651,17 +685,42 @@
                                     '/assets/img/users/user-41.jpg');
                             }
 
-                            // Update the form action dynamically
+                            // Set the form action dynamically
+                            // $('#editCustomerForm').attr('action', '/customers/' + customerId);
                             $('#editCustomerForm').attr('action', fetchUrl);
+                            // ===== Status Toggle Setup =====
+                            var checkbox = $('#edit-status-checkbox');
+                            var statusText = $('#edit-status-text');
 
+                            if (response.status == 1) {
+                                checkbox.prop('checked', true);
+                                statusText.text('Active').removeClass('bg-danger').addClass(
+                                    'bg-success');
+                            } else {
+                                checkbox.prop('checked', false);
+                                statusText.text('Not Active').removeClass('bg-success').addClass(
+                                    'bg-danger');
+                            }
                         },
                         error: function() {
                             alert('Failed to fetch customer details');
                         }
                     });
                 });
+
+                // Live status badge toggle when checkbox is changed
+                $('#edit-status-checkbox').on('change', function() {
+                    var statusText = $('#edit-status-text');
+                    if ($(this).is(':checked')) {
+                        statusText.text('Active').removeClass('bg-danger').addClass('bg-success');
+                    } else {
+                        statusText.text('Not Active').removeClass('bg-success').addClass('bg-danger');
+                    }
+                });
             });
         </script>
+
+
         {{-- /Edit end --}}
 
 
@@ -706,7 +765,7 @@
         </script>
 
         {{-- Export  --}}
-             <script>
+        <script>
             $(document).ready(function() {
                 function submitExportForm(route) {
                     var selectedIds = [];
@@ -766,6 +825,29 @@
                     // Set the form action
                     $('#deleteCustomerForm').attr('action', finalRoute);
                 });
+            });
+        </script>
+
+        {{-- Add sttaus --}}
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const checkbox = document.getElementById("user1");
+                const statusText = document.getElementById("status-text");
+
+                function updateStatus() {
+                    if (checkbox.checked) {
+                        statusText.textContent = "Active";
+                        statusText.classList.remove("bg-danger");
+                        statusText.classList.add("bg-success");
+                    } else {
+                        statusText.textContent = "Not Active";
+                        statusText.classList.remove("bg-success");
+                        statusText.classList.add("bg-danger");
+                    }
+                }
+
+                checkbox.addEventListener("change", updateStatus);
+                updateStatus(); // Initial set
             });
         </script>
     @endpush

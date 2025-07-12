@@ -3,6 +3,7 @@
 use App\Http\Controllers\APP\BarcodeContoller;
 use App\Http\Controllers\App\CategoryController;
 use App\Http\Controllers\APP\SubCategoriesController;
+use App\Http\Controllers\App\SupplierController;
 use App\Http\Controllers\App\VariantController;
 use App\Http\Controllers\APP\ProductsController;
 
@@ -61,9 +62,22 @@ Route::get('/customers/{id}', [CustomerController::class, 'show'])->name('custom
 Route::put('/customers/{id}', [CustomerController::class, 'update'])->name('customers.update');
 Route::delete('/customers/{id}', [CustomerController::class, 'destroy'])->name('customers.destroy');
 
-// Download pdf
+// Customer Download pdf
 Route::post('/customers/download-pdf', [CustomerController::class, 'downloadPdf'])->name('customers.downloadPdf');
-Route::post('/customers/download-excel', [CustomerController::class, 'downloadExcel'])->name('customers.downloadExcel');;
+Route::post('/customers/download-excel', [CustomerController::class, 'downloadExcel'])->name('customers.downloadExcel');
+
+
+// Supplier Section
+
+Route::post('/suppliers/download-pdf', [SupplierController::class, 'downloadPdf'])->name('suppliers.downloadPdf');
+Route::post('/suppliers/download-excel', [SupplierController::class, 'downloadExcel'])->name('suppliers.downloadExcel');
+
+Route::get('suppliers-view', [SupplierController::class, 'index'])->name('suppliers.view');
+Route::post('/suppliers', [SupplierController::class, 'store'])->name('suppliers.store');
+Route::get('/suppliers/{id}', [SupplierController::class, 'show'])->name('suppliers.show');
+Route::put('/suppliers/{id}', [SupplierController::class, 'update'])->name('suppliers.update');
+Route::delete('/suppliers/{id}', [SupplierController::class, 'destroy'])->name('suppliers.destroy');
+
 
 
 
