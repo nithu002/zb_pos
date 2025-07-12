@@ -136,7 +136,6 @@
                             aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-
                     </div>
                     <div>
                         <div class="modal-body">
@@ -197,12 +196,17 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div>
+                    <form action="{{ route('category.update') }}" method="post" enctype="multipart/form-data">
+                        @csrf
                         <div class="modal-body">
                             <div class="mb-3">
                                 <div class="add-image-upload">
+
+                                    <div id="edit_category_image_preview" class=" preview-images d-flex align-items-center add-image">
+
                                     <div
                                         class="edit_category_image_preview preview-images d-flex align-items-center add-image">
+
 
                                     </div>
                                     <div class="new-employee-field">
@@ -239,9 +243,9 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn me-2 btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="button" id="editCategory" class="btn btn-primary">Save Changes</button>
+                            <button type="submit"  class="btn btn-primary">Save Changes</button>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -314,13 +318,13 @@
                 const reader = new FileReader();
                 reader.onload = function(evt) {
                     const imgHtml = `
-            <div class="phone-img uploaded" style="position:relative; display:inline-block; margin:5px;">
-                <img src="${evt.target.result}" alt="image" style="max-width:110px; max-height:110px; border-radius:8px; box-shadow:0 2px 8px #eee;">
-                <a href="javascript:void(0);" class="remove-product" style="position:absolute;top:5px;right:5px;">
-                    <span style="background:#f33;color:#fff;border-radius:50%;padding:2px 6px;font-weight:bold;font-size:16px;line-height:1;">×</span>
-                </a>
-            </div>
-        `;
+                        <div class="phone-img uploaded" style="position:relative; display:inline-block; margin:5px;">
+                            <img src="${evt.target.result}" alt="image" style="max-width:110px; max-height:110px; border-radius:8px; box-shadow:0 2px 8px #eee;">
+                            <a href="javascript:void(0);" class="remove-product" style="position:absolute;top:5px;right:5px;">
+                                <span style="background:#f33;color:#fff;border-radius:50%;padding:2px 6px;font-weight:bold;font-size:16px;line-height:1;">×</span>
+                            </a>
+                        </div>
+                    `;
                     $previewArea.html(imgHtml);
                     if (window.feather) feather.replace();
                 };
