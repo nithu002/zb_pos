@@ -70,10 +70,25 @@ Route::post('category/update', [CategoryController::class, 'update'])->name('cat
 Route::post('category/destroy', [CategoryController::class, 'destroy'])->name('category.destroy');
 
 //Sub Categories
-Route::resource('sub-categories', SubCategoriesController::class)->only(['index', 'store', 'update', 'destroy']);
+Route::resource('sub-categories', SubCategoriesController::class)->only(['index', 'store', 'destroy']);
+Route::post('sub-categories/update', [SubCategoriesController::class, 'update'])->name('sub-categories.update');
+Route::post('sub-categories/filterByCategory', [SubCategoriesController::class, 'filterByCategory'])->name('subCategory.filterByCategory');
+Route::post('sub-categories/filterByStatus', [SubCategoriesController::class, 'filterByStatus'])->name('subCategory.filterByStatus');
+
+// sub-categories delete
+Route::post('sub-categories/delete', [SubCategoriesController::class, 'destroy'])->name('sub-categories.destroy');
 
 
 
+
+Route::get('supplier-view', function () {
+    return view('supplier.view');
+});
+
+// Location view
+Route::get('location-view', function () {
+    return view('location.view');
+});
 
 
 
