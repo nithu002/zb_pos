@@ -26,6 +26,7 @@ class CustomerController extends Controller
     {
         $validated = $request->validate([
             'first_name' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // max 2MB
             // 'last_name' => 'required',
             // 'email' => 'required',
             // 'phone' => 'required',
@@ -48,7 +49,6 @@ class CustomerController extends Controller
         $customer->province = $request->province ?? '';
         $customer->status = $request->has('addstatus') ? 1 : 0;
 
-        // $customer = Customer::create($validated);
 
 
         // Handle image upload
@@ -80,16 +80,7 @@ class CustomerController extends Controller
 
         $customer->save();
 
-        // Handle image upload if exists
-        // if ($request->hasFile('image')) {
-        //     $image      = $request->file('image');
-        //     $imageName  = time() . '_' . Str::random(10) . '.' . $image->getClientOriginalExtension();
-        //     $image->storeAs('public/customers', $imageName); // stores in storage/app/public/customers
-        //     $validated['image'] = $imageName;
-        // }
 
-
-        // Customer::create($validated);
         return back()->with('success', 'Customer added successfully!');
     }
 
@@ -107,7 +98,8 @@ class CustomerController extends Controller
 
         $validated = $request->validate([
             'first_name' => 'required',
-       
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // max 2MB
+
         ]);
 
         // Update fields

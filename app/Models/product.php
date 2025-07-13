@@ -52,4 +52,5 @@ class product extends Model
     public function supply(){
         return $this->belongsTo(Supplier::class,'supplier_id','id');
     }
+    
 }

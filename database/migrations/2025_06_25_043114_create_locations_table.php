@@ -14,7 +14,11 @@ return new class extends Migration
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('creat_by')->constrained('users');
+            $table->string('contact_person');
+            $table->string('phone');
+            // $table->string('product_count')->nullable();
+            $table->string('status')->default(1);
+            // $table->foreignId('creat_by')->constrained('users')->nullable();
             $table->integer('set')->default(0);
             $table->timestamps();
         });
