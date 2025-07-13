@@ -104,10 +104,6 @@ Route::post('unit/filterByStatus', [UnitController::class, 'filterByStatus'])->n
 Route::post('unit/destroy', [UnitController::class, 'destroy'])->name('unit.destroy');
 
 
-
-
-
-
 //Variant Routes
 Route::resource('variants', VariantController::class);
 Route::post('variant/update', [VariantController::class, 'update'])->name('variant.update');
@@ -123,3 +119,8 @@ Route::resource('barcode', BarcodeContoller::class);
 Route::post('barcodes-print', [BarcodeContoller::class, 'printBarcode'])->name('barcodes.print');
 Route::post('barcode-delete', [BarcodeContoller::class, 'destroy'])->name('barcode.delete');
 
+
+// POS Routes
+Route::get('pos', function () {
+    return view('pos.index');
+})->name('pos');
