@@ -286,7 +286,7 @@ $(document).ready(function () {
                     $('#subCategorySelect').empty().append('<option value="">Select</option>');
                     if (data.length > 0) {
                         $.each(data, function (index, subCategory) {
-                            $('#subCategorySelect').append('<option value="' + subCategory.name + '">' + subCategory.name + '</option>');
+                            $('#subCategorySelect').append('<option value="' + subCategory.subcategory + '">' + subCategory.subcategory + '</option>');
                         });
                     } else {
                         $('#subCategorySelect').append('<option value="" disabled>No subcategories found</option>');

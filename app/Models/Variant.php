@@ -10,4 +10,9 @@ class Variant extends Model
     protected $casts = [
         'values' => 'array',
     ];
+    protected $fillable = [
+        'name',
+        'values',
+        'status',
+    ];
 }

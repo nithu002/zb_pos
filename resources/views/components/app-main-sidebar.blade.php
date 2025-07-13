@@ -90,12 +90,12 @@
 								<li><a href="{{ route('low-stock.product') }}"><i class="ti ti-trending-up-2 fs-16 me-2"></i><span>Low Stocks</span></a></li>
 								<li><a href="{{ route('categories.index') }}"><i class="ti ti-list-details fs-16 me-2"></i><span>Category</span></a></li>
 								<li><a href="{{ route('sub-categories.index') }}"><i class="ti ti-carousel-vertical fs-16 me-2"></i><span>Sub Category</span></a></li>
-								<li><a href="brand-list.html"><i class="ti ti-triangles fs-16 me-2"></i><span>Brands</span></a></li>
-								<li><a href="units.html"><i class="ti ti-brand-unity fs-16 me-2"></i><span>Units</span></a></li>
-								<li><a href="varriant-attributes.html"><i class="ti ti-checklist fs-16 me-2"></i><span>Variant Attributes</span></a></li>
-								<li><a href="warranty.html"><i class="ti ti-certificate fs-16 me-2"></i><span>Warranties</span></a></li>
+								<li><a href="{{ route('brands.index') }}"><i class="ti ti-triangles fs-16 me-2"></i><span>Brands</span></a></li>
+								<li><a href="{{ route('units.index') }}"><i class="ti ti-brand-unity fs-16 me-2"></i><span>Units</span></a></li>
+								<li><a href="{{ route('variants.index') }}"><i class="ti ti-checklist fs-16 me-2"></i><span>Variant Attributes</span></a></li>
+								<li><a href="{{ route('warranty.index') }}"><i class="ti ti-certificate fs-16 me-2"></i><span>Warranties</span></a></li>
 								<li><a href="{{ route('barcode.index') }}"><i class="ti ti-barcode fs-16 me-2"></i><span>Print Barcode</span></a></li>
-								<li><a href="qrcode.html"><i class="ti ti-qrcode fs-16 me-2"></i><span>Print QR Code</span></a></li>
+								{{-- <li><a href="qrcode.html"><i class="ti ti-qrcode fs-16 me-2"></i><span>Print QR Code</span></a></li> --}}
 							</ul>
 						</li>
 						<li class="submenu-open">

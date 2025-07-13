@@ -19,7 +19,7 @@
         <td>{{ $category->slug }}</td>
         <td>{{ $category->created_at }}</td>
         <td>
-            <span class="badge fw-medium fs-10 {{ $category->status == 1 ? 'bg-success' : 'bg-info' }}">
+             <span class="badge table-badge  {{ $category->status == 1 ? 'bg-success' : 'bg-info' }} fw-medium fs-10">
                 {{ $category->status == 1 ? 'Active' : 'Deactivate' }}
             </span>
         </td>

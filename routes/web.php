@@ -5,15 +5,18 @@ use App\Http\Controllers\App\CategoryController;
 use App\Http\Controllers\APP\LocationController;
 use App\Http\Controllers\APP\SubCategoriesController;
 use App\Http\Controllers\App\SupplierController;
+use App\Http\Controllers\APP\UnitController;
 use App\Http\Controllers\App\VariantController;
 use App\Http\Controllers\APP\ProductsController;
 
 use App\Http\Controllers\APP\CustomerController;
+use App\Http\Controllers\APP\BrandController;
+use App\Http\Controllers\APP\WarrantyController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('app.dashboard');
-});
+})->name('dashboard');
 
 
 // App Routes
@@ -87,21 +90,38 @@ Route::resource('sub-categories', SubCategoriesController::class)->only(['index'
 Route::post('sub-categories/update', [SubCategoriesController::class, 'update'])->name('sub-categories.update');
 Route::post('sub-categories/filterByCategory', [SubCategoriesController::class, 'filterByCategory'])->name('subCategory.filterByCategory');
 Route::post('sub-categories/filterByStatus', [SubCategoriesController::class, 'filterByStatus'])->name('subCategory.filterByStatus');
-
-// sub-categories delete
-Route::post('sub-categories/delete', [SubCategoriesController::class, 'destroy'])->name('sub-categories.destroy');
+Route::post('sub-categories/destroy', [SubCategoriesController::class, 'destroy'])->name('subCategories.destroy');
 
 
+//Brand Routes
+Route::resource('brands',BrandController::class);
 
+//Units Routes
+Route::resource('units',UnitController::class);
+Route::post('unit/update', [UnitController::class, 'update'])->name('unit.update');
+Route::post('unit/filterByStatus', [UnitController::class, 'filterByStatus'])->name('unit.filterByStatus');
+Route::post('unit/destroy', [UnitController::class, 'destroy'])->name('unit.destroy');
+
+<<<<<<< HEAD
 // Location view
 
 Route::get('location', [LocationController::class, 'index'])->name('location');
+=======
+
+>>>>>>> b42d1d9b7a9eb64654ec9f21d31254541e4a09c3
 
 
 
 
 //Variant Routes
 Route::resource('variants', VariantController::class);
+Route::post('variant/update', [VariantController::class, 'update'])->name('variant.update');
+
+// Warranty Routes
+Route::resource('warranty', WarrantyController::class);
+Route::post('warrantys/update', [WarrantyController::class, 'update'])->name('warrantys.update');
+Route::post('warrantys/destroy', [WarrantyController::class,'destroy'])->name('warrantys.destroy');
+
 
 //Barcode
 Route::resource('barcode', BarcodeContoller::class);

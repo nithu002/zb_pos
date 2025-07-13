@@ -43,7 +43,12 @@ class CategoryController extends Controller
 
         $cat = new Category();
         $cat->category = $request->category;
-        $cat->status = $request->status ?? 1;
+        // $cat->status = $request->status ?? 1;
+        if($request->status == 'on') {
+            $cat->status =  1;
+        }else{
+            $cat->status = 0;
+        }
         if ($request->hasFile('image')) {
             $image = $request->file('image');
 
@@ -103,7 +108,6 @@ class CategoryController extends Controller
      */
     public function update(Request $request)
     {
-
       //   return $request->all();
         //
         $category = Category::find($request->id);
@@ -140,8 +144,6 @@ class CategoryController extends Controller
         if($category->save()){
             return redirect()->back()->with('success','Category is updated');
         }
-
-
     }
 
     /**
@@ -169,7 +171,7 @@ class CategoryController extends Controller
     {
 
         $categoryId = $request->category_id;
-        $subcategories = SubCategory::where('cat_id', $categoryId)->get(columns: ['name']);
+        $subcategories = SubCategory::where('cat_id', $categoryId)->get(columns: ['subcategory']);
 
         return response()->json($subcategories);
     }
