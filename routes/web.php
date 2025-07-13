@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\APP\BarcodeContoller;
 use App\Http\Controllers\App\CategoryController;
+use App\Http\Controllers\APP\LocationController;
 use App\Http\Controllers\APP\SubCategoriesController;
 use App\Http\Controllers\App\SupplierController;
 use App\Http\Controllers\App\VariantController;
@@ -49,10 +50,8 @@ Route::post('category/update', [CategoryController::class, 'update'])->name('cat
 
 
 // Customer view
-Route::get('customer-view', [CustomerController::class, 'index'])->name('customer.view');
+Route::get('customers', [CustomerController::class, 'index'])->name('customer');
 Route::post('/customers', [CustomerController::class, 'store'])->name('customers.store');
-// Route::get('/customers', [CustomerController::class, 'show'])->name('customers.show');
-
 Route::get('/customers/{id}', [CustomerController::class, 'show'])->name('customers.show');
 Route::put('/customers/{id}', [CustomerController::class, 'update'])->name('customers.update');
 Route::delete('/customers/{id}', [CustomerController::class, 'destroy'])->name('customers.destroy');
@@ -67,7 +66,7 @@ Route::post('/customers/download-excel', [CustomerController::class, 'downloadEx
 Route::post('/suppliers/download-pdf', [SupplierController::class, 'downloadPdf'])->name('suppliers.downloadPdf');
 Route::post('/suppliers/download-excel', [SupplierController::class, 'downloadExcel'])->name('suppliers.downloadExcel');
 
-Route::get('suppliers-view', [SupplierController::class, 'index'])->name('suppliers.view');
+Route::get('suppliers', [SupplierController::class, 'index'])->name('suppliers');
 Route::post('/suppliers', [SupplierController::class, 'store'])->name('suppliers.store');
 Route::get('/suppliers/{id}', [SupplierController::class, 'show'])->name('suppliers.show');
 Route::put('/suppliers/{id}', [SupplierController::class, 'update'])->name('suppliers.update');
@@ -94,15 +93,9 @@ Route::post('sub-categories/delete', [SubCategoriesController::class, 'destroy']
 
 
 
-
-Route::get('supplier-view', function () {
-    return view('supplier.view');
-});
-
 // Location view
-Route::get('location-view', function () {
-    return view('location.view');
-});
+
+Route::get('location', [LocationController::class, 'index'])->name('location');
 
 
 

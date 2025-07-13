@@ -18,19 +18,19 @@
                     </div>
                 </div>
                 <ul class="table-top-head">
-                    <li class="me-2">
-                        <a data-bs-toggle="tooltip" data-bs-placement="top" title="Pdf"><img src="assets/img/icons/pdf.svg"
-                                alt="img"></a>
+                    <li>
+                        <a id="export-selected-pdf" data-bs-toggle="tooltip" data-bs-placement="top" title="Pdf"><img
+                                src="assets/img/icons/pdf.svg" alt="img"></a>
                     </li>
-                    <li class="me-2">
-                        <a data-bs-toggle="tooltip" data-bs-placement="top" title="Excel"><img
+                    <li>
+                        <a data-bs-toggle="tooltip" id="export-selected" data-bs-placement="top" title="Excel"><img
                                 src="assets/img/icons/excel.svg" alt="img"></a>
                     </li>
-                    <li class="me-2">
-                        <a data-bs-toggle="tooltip" data-bs-placement="top" title="Refresh"><i
+                    <li>
+                        <a href="{{ url()->current() }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Refresh"><i
                                 class="ti ti-refresh"></i></a>
                     </li>
-                    <li class="me-2">
+                    <li>
                         <a data-bs-toggle="tooltip" data-bs-placement="top" title="Collapse" id="collapse-header"><i
                                 class="ti ti-chevron-up"></i></a>
                     </li>
@@ -110,7 +110,7 @@
                                     <td>
                                         +12498345785
                                     </td>
-                                   
+
                                     <td>
                                         <span class="badge badge-success d-inline-flex align-items-center badge-xs">
                                             <i class="ti ti-point-filled me-1"></i>Active
@@ -133,7 +133,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                              
+
                                 <tr>
                                     <td>
                                         <label class="checkboxs">
@@ -155,7 +155,7 @@
                                     <td>
                                         +12498345785
                                     </td>
-                                   
+
                                     <td>
                                         <span class="badge badge-success d-inline-flex align-items-center badge-xs">
                                             <i class="ti ti-point-filled me-1"></i>Active
@@ -178,7 +178,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                
+
                             </tbody>
                         </table>
                     </div>
@@ -219,7 +219,7 @@
 											<option>Gravely</option>
 										</select>
 									</div>
-								</div>	
+								</div>
 								{{-- <div class="col-lg-12">
 									<div class="mb-3">
 										<label class="form-label">Email <span class="text-danger">*</span></label>
@@ -231,7 +231,7 @@
 										<label class="form-label">Phone <span class="text-danger">*</span></label>
 										<input type="number" class="form-control" required>
 									</div>
-								</div>	
+								</div>
 								{{-- <div class="col-lg-6">
 									<div class="mb-3">
 										<label class="form-label">Phone(Work)</label>
@@ -251,7 +251,7 @@
 											<option>Select</option>
 											<option>Varrel</option>
 											<option>Los Angels</option>
-											<option>Munich</option>											
+											<option>Munich</option>
 										</select>
 									</div>
 								</div>
@@ -262,7 +262,7 @@
 											<option>Select</option>
 											<option>Bavaria</option>
 											<option>New York City</option>
-											<option>California</option>											
+											<option>California</option>
 										</select>
 									</div>
 								</div>
@@ -273,7 +273,7 @@
 											<option>Select</option>
 											<option>Germany</option>
 											<option>Mexico</option>
-											<option>United States</option>											
+											<option>United States</option>
 										</select>
 									</div>
 								</div>
@@ -290,7 +290,7 @@
 											<input type="checkbox" id="users5" class="check" checked>
 											<label for="users5" class="checktoggle mb-0"></label>
 										</div>
-									</div>	
+									</div>
 								</div>
 							</div>
 						</div>
@@ -334,15 +334,15 @@
 											<option>Gravely</option>
 										</select> --}}
 									</div>
-								</div>	
-								
+								</div>
+
 								<div class="col-lg-12">
 									<div class="mb-3">
 										<label class="form-label">Phone: <span class="text-danger">*</span></label>
 										{{-- <input type="number" class="form-control" value="+12498345785"> --}}
 									</div>
-								</div>	
-								
+								</div>
+
 								<div class="col-md-12">
 									<div class="mb-0">
 										<div class="status-toggle modal-status d-flex justify-content-between align-items-center">
@@ -350,7 +350,7 @@
 											<input type="checkbox" id="users6" class="check" checked>
 											<label for="users6" class="checktoggle mb-0"></label>
 										</div>
-									</div>	
+									</div>
 								</div>
 							</div>
 						</div>
@@ -395,15 +395,15 @@
 											<option>Gravely</option>
 										</select>
 									</div>
-								</div>	
-								
+								</div>
+
 								<div class="col-lg-12">
 									<div class="mb-3">
 										<label class="form-label">Phone <span class="text-danger">*</span></label>
 										<input type="number" class="form-control" value="+12498345785">
 									</div>
-								</div>	
-								
+								</div>
+
 								<div class="col-md-12">
 									<div class="mb-0">
 										<div class="status-toggle modal-status d-flex justify-content-between align-items-center">
@@ -411,7 +411,7 @@
 											<input type="checkbox" id="users6" class="check" checked>
 											<label for="users6" class="checktoggle mb-0"></label>
 										</div>
-									</div>	
+									</div>
 								</div>
 							</div>
 						</div>
@@ -432,12 +432,12 @@
 					<div class="modal-body text-center p-0">
 						<span class="rounded-circle d-inline-flex p-2 bg-danger-transparent mb-2"><i class="ti ti-trash fs-24 text-danger"></i></span>
 						<h4 class="fs-20 text-gray-9 fw-bold mb-2 mt-1">Delete Location</h4>
-						<p class="text-gray-6 mb-0 fs-16">Are you sure you want to delete Location?</p>	
+						<p class="text-gray-6 mb-0 fs-16">Are you sure you want to delete Location?</p>
 						<div class="d-flex justify-content-center mt-3">
 							<a class="btn me-2 btn-secondary fs-13 fw-medium p-2 px-3 shadow-none" data-bs-dismiss="modal">Cancel</a>
 							<a href="warehouse.html" class="btn btn-primary fs-13 fw-medium p-2 px-3">Yes Delete</a>
-						</div>											
-					</div>					
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

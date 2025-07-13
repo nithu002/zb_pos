@@ -69,12 +69,14 @@
                                 data-bs-toggle="dropdown">
                                 Status
                             </a>
-                            <ul class="dropdown-menu  dropdown-menu-end p-3">
+                            <ul class="dropdown-menu  dropdown-menu-end p-3" id="statusFilterDropdown">
                                 <li>
-                                    <a href="javascript:void(0);" class="dropdown-item rounded-1">Active</a>
+                                    <a href="javascript:void(0);" class="dropdown-item rounded-1 filter-status"
+                                        data-status="1">Active</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:void(0);" class="dropdown-item rounded-1">Inactive</a>
+                                    <a href="javascript:void(0);" class="dropdown-item rounded-1 filter-status"
+                                        data-status="0">Inactive</a>
                                 </li>
                             </ul>
                         </div>
@@ -104,7 +106,7 @@
                             </thead>
                             <tbody>
                                 @forelse ($suppliers as $supplier)
-                                    <tr>
+                                    <tr class="customer-row" data-status="{{ $supplier->status }}">
                                         <td>
                                             <label class="checkboxs">
                                                 <input type="checkbox" class="row-checkbox" value="{{ $supplier->id }}">
@@ -221,37 +223,38 @@
 
                                 <div class="col-lg-12">
                                     <div class="mb-3">
-                                        <label class="form-label">Company Name <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control"  name="company_name">
+                                        <label class="form-label">Company Name <span
+                                                    class="text-danger">*</span> </label>
+                                        <input type="text" class="form-control"  name="company_name" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="mb-3">
-                                        <label class="form-label">Email <span class="text-danger">*</span></label>
+                                        <label class="form-label">Email </label>
                                         <input type="email" class="form-control"  name="email">
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="mb-3">
-                                        <label class="form-label">Phone <span class="text-danger">*</span></label>
+                                        <label class="form-label">Phone </label>
                                         <input type="number" class="form-control" name="phone">
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="mb-3">
-                                        <label class="form-label">Address <span class="text-danger">*</span></label>
+                                        <label class="form-label">Address </label>
                                         <input type="text" class="form-control" name="address">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Bank Name <span class="text-danger">*</span></label>
+                                        <label class="form-label">Bank Name </label>
                                         <input type="text" class="form-control" name="bank_name">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="mb-3">
-                                        <label class="form-label">Bank Acc No <span class="text-danger">*</span></label>
+                                        <label class="form-label">Bank Acc No </label>
                                         <input type="text" class="form-control" name="bank_acc_no">
                                     </div>
                                 </div>
@@ -304,7 +307,7 @@
                                             <div class="profile-pic p-2">
                                                 <img id="viewSupplierImage"
                                                     src="{{ asset('assets/img/users/user-41.jpg') }}"
-                                                    class="object-fit-cover h-100 rounded-1" alt="user">
+                                                    class="object-fit-cover h-100 rounded-1" alt="user"  accept=".jpeg, .png, .jpg">
 
                                                 <button type="button" class="close rounded-1">
                                                     <span aria-hidden="false">&times;</span>
@@ -406,7 +409,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <input type="file" name="image" class="form-control"
-                                                    id="editSupplierImageFile">
+                                                    id="editSupplierImageFile"  accept=".jpeg, .png, .jpg">
                                                 <p class="mt-2">JPEG, PNG up to 2 MB</p>
                                             </div>
                                         </div>
@@ -423,26 +426,26 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="mb-3">
-                                            <label class="form-label">Email <span class="text-danger">*</span></label>
+                                            <label class="form-label">Email </label>
                                             <input type="email" class="form-control" name="email" id="editEmail">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="mb-3">
-                                            <label class="form-label">Phone <span class="text-danger">*</span></label>
+                                            <label class="form-label">Phone </label>
                                             <input type="number" class="form-control" name="phone" id="editPhone">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="mb-3">
-                                            <label class="form-label">Address <span class="text-danger">*</span></label>
+                                            <label class="form-label">Address </label>
                                             <input type="text" class="form-control" name="address" id="editAddress">
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6">
                                         <div class="mb-3">
-                                            <label class="form-label">Bank Name <span class="text-danger">*</span></label>
+                                            <label class="form-label">Bank Name </label>
                                             <input type="text" class="form-control" name="bank_name"
                                                 id="editBankName">
 
@@ -451,8 +454,7 @@
 
                                     <div class="col-lg-6">
                                         <div class="mb-3">
-                                            <label class="form-label">Bank Acc No <span
-                                                    class="text-danger">*</span></label>
+                                            <label class="form-label">Bank Acc No </label>
                                             <input type="text" class="form-control" name="bank_acc_no"
                                                 id="editBankAccNo">
                                         </div>
@@ -461,8 +463,7 @@
                                     <div class="col-lg-12">
                                         <div
                                             class="status-toggle modal-status d-flex justify-content-between align-items-center">
-                                            <span class="status-label">Status <span
-                                                    class="text-danger ms-1">*</span></span>
+                                            <span class="status-label">Status </span>
                                             <div class="d-flex align-items-center gap-2">
                                                 <input type="checkbox" name="addstatus" id="edit-status-checkbox"
                                                     class="check">
@@ -596,8 +597,15 @@
                 $('#editSupplierImageFile').on('change', function(e) {
                     const file = e.target.files[0];
 
-                    if (!file || !file.type.startsWith('image/')) {
-                        toastr.error('Only image files are allowed!');
+                    // if (!file || !file.type.startsWith('image/')) {
+                    //     toastr.error('Only image files are allowed!');
+                    //     return;
+                    // }
+                     if (!file || !file.type.startsWith('image/')) {
+                        toastr.error('Only image files (JPEG, PNG, JPG) are allowed!');
+                        $(this).val(''); // Clear the invalid file
+                        $('#editCustomerImage').attr('src',
+                        '/assets/img/users/user-41.jpg'); // Optional fallback preview
                         return;
                     }
 
@@ -809,6 +817,25 @@
                 checkbox.addEventListener("change", updateStatus);
                 updateStatus(); // Initial set
             });
+
+            $(document).ready(function() {
+                // Handle status filter click
+                $('.filter-status').on('click', function() {
+                    const selectedStatus = $(this).data('status'); // 1 or 0
+
+                    // Hide all customer rows
+                    $('.customer-row').hide();
+
+                    // Show only matching status rows
+                    $('.customer-row').each(function() {
+                        const rowStatus = $(this).data('status'); // from <tr data-status="1">
+                        if (rowStatus == selectedStatus) {
+                            $(this).show();
+                        }
+                    });
+                });
+            });
+
         </script>
     @endpush
 </x-app-layout>

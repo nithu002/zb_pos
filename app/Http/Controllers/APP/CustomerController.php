@@ -26,6 +26,7 @@ class CustomerController extends Controller
     {
         $validated = $request->validate([
             'first_name' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // max 2MB
             // 'last_name' => 'required',
             // 'email' => 'required',
             // 'phone' => 'required',
@@ -107,7 +108,8 @@ class CustomerController extends Controller
 
         $validated = $request->validate([
             'first_name' => 'required',
-       
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // max 2MB
+
         ]);
 
         // Update fields

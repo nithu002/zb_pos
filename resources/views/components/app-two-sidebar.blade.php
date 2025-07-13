@@ -219,11 +219,11 @@
 									<li><a href="trial-balance.html"><span>Trial Balance</span></a></li>
 									<li><a href="cash-flow.html"><span>Cash Flow</span></a></li>
 									<li><a href="account-statement.html"><span>Account Statement</span></a></li>
-									<li><a href="{{url('customer-view')}}"><span>Customers</span></a></li>
+									<li><a href="{{route('customer')}}"><span>Customers</span></a></li>
 									{{-- <li><a href="{{url('billers-view')}}"><span>Billers</span></a></li> --}}
-									<li><a href="{{url('supplier-view')}}"><span>Suppliers</span></a></li>
+									<li><a href="{{route('suppliers')}}"><span>Suppliers</span></a></li>
 									{{-- <li><a href="store-list.html"><span>Stores</span></a></li> --}}
-									<li><a href="{{url('location-view')}}"><span>Location</span></a></li>
+									<li><a href="{{route('location')}}"><span>Location</span></a></li>
 								</ul>
 							</div>
 							<div class="tab-pane fade" id="hrm">

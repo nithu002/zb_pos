@@ -67,12 +67,14 @@
                                 data-bs-toggle="dropdown">
                                 Status
                             </a>
-                            <ul class="dropdown-menu  dropdown-menu-end p-3">
+                            <ul class="dropdown-menu  dropdown-menu-end p-3" id="statusFilterDropdown">
                                 <li>
-                                    <a href="javascript:void(0);" class="dropdown-item rounded-1">Active</a>
+                                    <a href="javascript:void(0);" class="dropdown-item rounded-1 filter-status"
+                                        data-status="1">Active</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:void(0);" class="dropdown-item rounded-1">Inactive</a>
+                                    <a href="javascript:void(0);" class="dropdown-item rounded-1 filter-status"
+                                        data-status="0">Inactive</a>
                                 </li>
 
                             </ul>
@@ -101,7 +103,7 @@
                             </thead>
                             <tbody>
                                 @forelse ($customers as $customer)
-                                    <tr>
+                                    <tr class="customer-row" data-status="{{ $customer->status }}">
                                         <td>
                                             <label class="checkboxs">
                                                 <input type="checkbox" class="row-checkbox" value="{{ $customer->id }}">
@@ -135,7 +137,7 @@
                                             @else
                                                 <span
                                                     class="d-inline-flex align-items-center p-1 pe-2 rounded-1 text-white bg-danger fs-10"><i
-                                                        class="ti ti-point-filled me-1 fs-11"></i>Not Active</span>
+                                                        class="ti ti-point-filled me-1 fs-11"></i>Inactive</span>
                                             @endif
                                         </td>
 
@@ -220,23 +222,23 @@
                                     <input type="text" class="form-control" name="first_name" required>
                                 </div>
                                 <div class="col-lg-6 mb-3">
-                                    <label class="form-label">Last Name<span class="text-danger ms-1">*</span></label>
+                                    <label class="form-label">Last Name</label>
                                     <input type="text" class="form-control" name="last_name">
                                 </div>
                                 <div class="col-lg-12 mb-3">
-                                    <label class="form-label">Email<span class="text-danger ms-1">*</span></label>
+                                    <label class="form-label">Email</label>
                                     <input type="email" class="form-control" name="email">
                                 </div>
                                 <div class="col-lg-12 mb-3">
-                                    <label class="form-label">Phone<span class="text-danger ms-1">*</span></label>
+                                    <label class="form-label">Phone</label>
                                     <input type="number" class="form-control" name="phone">
                                 </div>
                                 <div class="col-lg-12 mb-3">
-                                    <label class="form-label">Address<span class="text-danger ms-1">*</span></label>
+                                    <label class="form-label">Address</label>
                                     <input type="text" class="form-control" name="address">
                                 </div>
                                 <div class="col-lg-6 mb-3">
-                                    <label class="form-label">City<span class="text-danger ms-1">*</span></label>
+                                    <label class="form-label">City</label>
                                     <select class="form-select" name="city">
                                         <option value="">Select a city</option>
                                         <option value="Ampara">Ampara</option>
@@ -267,7 +269,7 @@
                                     </select>
                                 </div>
                                 <div class="col-lg-6 mb-3">
-                                    <label class="form-label">Province<span class="text-danger ms-1">*</span></label>
+                                    <label class="form-label">Province</label>
                                     <select class="form-select" name="province">
                                         <option value="">Select a province</option>
                                         <option value="Central">Central</option>
@@ -286,7 +288,7 @@
                                 <div class="col-lg-12">
                                     <div
                                         class="status-toggle modal-status d-flex justify-content-between align-items-center">
-                                        <span class="status-label">Status <span class="text-danger ms-1">*</span></span>
+                                        <span class="status-label">Status </span>
                                         <div class="d-flex align-items-center gap-2">
                                             <input type="checkbox" name="addstatus" id="user1" class="check"
                                                 {{ old('addstatus', true) ? 'checked' : '' }}>
@@ -333,7 +335,8 @@
                                             <div class="profile-pic p-2">
                                                 <img id="viewCustomerImage"
                                                     src="{{ asset('assets/img/users/user-41.jpg') }}"
-                                                    class="object-fit-cover h-100 rounded-1" alt="user">
+                                                    class="object-fit-cover h-100 rounded-1" alt="user"
+                                                    accept=".jpeg, .png, .jpg">
 
                                                 <button type="button" class="close rounded-1">
                                                     <span aria-hidden="false">&times;</span>
@@ -419,7 +422,8 @@
                                             </div>
                                             <div class="mb-3">
                                                 <input type="file" name="image" class="form-control"
-                                                    id="editCustomerImageFile">
+                                                    id="editCustomerImageFile" accept=".jpeg, .png, .jpg">
+
                                                 <p class="mt-2">JPEG, PNG up to 2 MB</p>
                                             </div>
                                         </div>
@@ -427,7 +431,8 @@
 
                                     <div class="row">
                                         <div class="col-lg-6 mb-3">
-                                            <label class="form-label">First Name</label>
+                                            <label class="form-label">First Name<span class="text-danger ms-1">*</span>
+                                            </label>
                                             <input type="text" name="first_name" id="editCustomerFirst"
                                                 class="form-control" required>
                                         </div>
@@ -648,8 +653,16 @@
                 $('#editCustomerImageFile').on('change', function(e) {
                     const file = e.target.files[0];
 
+                    // if (!file || !file.type.startsWith('image/')) {
+                    //     toastr.error('Only image files are allowed!');
+                    //     return;
+                    // }
+
                     if (!file || !file.type.startsWith('image/')) {
-                        toastr.error('Only image files are allowed!');
+                        toastr.error('Only image files (JPEG, PNG, JPG) are allowed!');
+                        $(this).val(''); // Clear the invalid file
+                        $('#editCustomerImage').attr('src',
+                            '/assets/img/users/user-41.jpg'); // Optional fallback preview
                         return;
                     }
 
@@ -698,7 +711,7 @@
                                     'bg-success');
                             } else {
                                 checkbox.prop('checked', false);
-                                statusText.text('Not Active').removeClass('bg-success').addClass(
+                                statusText.text('Inactive').removeClass('bg-success').addClass(
                                     'bg-danger');
                             }
                         },
@@ -714,7 +727,7 @@
                     if ($(this).is(':checked')) {
                         statusText.text('Active').removeClass('bg-danger').addClass('bg-success');
                     } else {
-                        statusText.text('Not Active').removeClass('bg-success').addClass('bg-danger');
+                        statusText.text('Inactive').removeClass('bg-success').addClass('bg-danger');
                     }
                 });
             });
@@ -840,7 +853,7 @@
                         statusText.classList.remove("bg-danger");
                         statusText.classList.add("bg-success");
                     } else {
-                        statusText.textContent = "Not Active";
+                        statusText.textContent = "Inactive";
                         statusText.classList.remove("bg-success");
                         statusText.classList.add("bg-danger");
                     }
@@ -848,6 +861,24 @@
 
                 checkbox.addEventListener("change", updateStatus);
                 updateStatus(); // Initial set
+            });
+
+            $(document).ready(function() {
+                // Handle status filter click
+                $('.filter-status').on('click', function() {
+                    const selectedStatus = $(this).data('status'); // 1 or 0
+
+                    // Hide all customer rows
+                    $('.customer-row').hide();
+
+                    // Show only matching status rows
+                    $('.customer-row').each(function() {
+                        const rowStatus = $(this).data('status'); // from <tr data-status="1">
+                        if (rowStatus == selectedStatus) {
+                            $(this).show();
+                        }
+                    });
+                });
             });
         </script>
     @endpush

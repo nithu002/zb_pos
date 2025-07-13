@@ -182,11 +182,11 @@
 						<li class="submenu-open">
 							<h6 class="submenu-hdr">Peoples</h6>
 							<ul>
-								<li><a href="{{route('customer.view')}}"><i class="ti ti-users-group fs-16 me-2"></i><span>Customers</span></a></li>
+								<li><a href="{{route('customer')}}"><i class="ti ti-users-group fs-16 me-2"></i><span>Customers</span></a></li>
 								{{-- <li><a href="{{url('billers-view')}}"><i class="ti ti-user-up fs-16 me-2"></i><span>Billers</span></a></li> --}}
-								<li><a href="{{route('suppliers.view')}}"><i class="ti ti-user-dollar fs-16 me-2"></i><span>Suppliers</span></a></li>
+								<li><a href="{{route('suppliers')}}"><i class="ti ti-user-dollar fs-16 me-2"></i><span>Suppliers</span></a></li>
 								{{-- <li><a href="store-list.html"><i class="ti ti-home-bolt fs-16 me-2"></i><span>Stores</span></a></li> --}}
-								<li><a href="{{url('location-view')}}"><i class="ti ti-archive fs-16 me-2"></i><span>Location</span></a>
+								<li><a href="{{route('location')}}"><i class="ti ti-archive fs-16 me-2"></i><span>Location</span></a>
 								</li>
 							</ul>
 						</li>
