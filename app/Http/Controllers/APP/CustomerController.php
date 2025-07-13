@@ -26,17 +26,32 @@ class CustomerController extends Controller
     {
         $validated = $request->validate([
             'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
-            'address' => 'required',
-            'city' => 'required',
-            'province' => 'required',
-            'image' => 'required',
+            // 'last_name' => 'required',
+            // 'email' => 'required',
+            // 'phone' => 'required',
+            // 'address' => 'required',
+            // 'city' => 'required',
+            // 'province' => 'required',
+            // 'status'=> 'Boolean',
+            // 'image' => 'required',
 
         ]);
 
-        $customer = Customer::create($validated);
+        // Prepare customer object
+        $customer = new Customer();
+        $customer->first_name = $validated['first_name'];
+        $customer->last_name = $request->last_name ?? '';
+        $customer->email = $request->email ?? '';
+        $customer->phone = $request->phone ?? '';
+        $customer->address = $request->address ?? '';
+        $customer->city = $request->city ?? '';
+        $customer->province = $request->province ?? '';
+        $customer->status = $request->has('addstatus') ? 1 : 0;
+
+        // $customer = Customer::create($validated);
+
+
+        // Handle image upload
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -90,34 +105,47 @@ class CustomerController extends Controller
     {
         $customer = Customer::findOrFail($id);
 
-        // $request->validate([
-        //     'first_name' => 'required',
-        //     'last_name' => 'required',
-        //     'email' => 'required' . $id,
-        //     'phone' => 'required',
-        //     'address' => 'required',
-        //     'city' => 'required',
-        //     'province' => 'required',
-        // ]);
-        // $data = $request->only([
-        //     'first_name',
-        //     'last_name',
-        //     'email',
-        //     'phone',
-        //     'address',
-        //     'city',
-        //     'province'
-        // ]);
+        $validated = $request->validate([
+            'first_name' => 'required',
+       
+        ]);
 
-        $data = $request->all();
+        // Update fields
+        $customer->first_name = $validated['first_name'];
+        $customer->last_name = $request->last_name ?? '';
+        $customer->email = $request->email ?? '';
+        $customer->phone = $request->phone ?? '';
+        $customer->address = $request->address ?? '';
+        $customer->city = $request->city ?? '';
+        $customer->province = $request->province ?? '';
+        $customer->status = $request->has('addstatus') ? 1 : 0;
 
+
+        // $data = $request->all();
+
+        // Handle image upload
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('customers', 'public');
+            $image = $request->file('image');
+
+            if ($image->isValid()) {
+                $extension = $image->getClientOriginalExtension();
+                $baseName = Str::slug($customer->first_name ?? 'customer');
+                $filename = $baseName . '_' . time() . '_' . Str::random(6) . '.' . $extension;
+
+                $uploadDir = public_path('storage/customers');
+                File::ensureDirectoryExists($uploadDir, 0755, true);
+
+                $image->move($uploadDir, $filename);
+
+                $customer->image = asset('storage/customers/' . $filename);
+            }
         }
 
-        $customer->update($data);
+        $customer->save();
 
         return back()->with('success', 'Customer updated successfully!');
+
+
     }
 
     public function destroy($id)
@@ -136,7 +164,7 @@ class CustomerController extends Controller
     //     return $pdf->download('selected-customers.pdf');
     // }
 
-     public function downloadPdf(Request $request)
+    public function downloadPdf(Request $request)
     {
         $ids = $request->input('ids', []);
 
