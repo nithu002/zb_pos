@@ -102,14 +102,16 @@ Route::post('unit/update', [UnitController::class, 'update'])->name('unit.update
 Route::post('unit/filterByStatus', [UnitController::class, 'filterByStatus'])->name('unit.filterByStatus');
 Route::post('unit/destroy', [UnitController::class, 'destroy'])->name('unit.destroy');
 
-<<<<<<< HEAD
 // Location view
 
+Route::post('/location/download-pdf', [LocationController::class, 'downloadPdf'])->name('location.downloadPdf');
+Route::post('/location/download-excel', [LocationController::class, 'downloadExcel'])->name('location.downloadExcel');
 Route::get('location', [LocationController::class, 'index'])->name('location');
-=======
 
->>>>>>> b42d1d9b7a9eb64654ec9f21d31254541e4a09c3
-
+Route::post('/location', [LocationController::class, 'store'])->name('location.store');
+Route::get('/location/{id}', [LocationController::class, 'show'])->name('location.show');
+Route::put('/location/{id}', [LocationController::class, 'update'])->name('location.update');
+Route::delete('/location/{id}', [LocationController::class, 'destroy'])->name('location.destroy');
 
 
 
