@@ -105,15 +105,6 @@ Route::post('unit/destroy', [UnitController::class, 'destroy'])->name('unit.dest
 
 
 
-Route::get('supplier-view', function () {
-    return view('supplier.view');
-});
-
-// Location view
-Route::get('location-view', function () {
-    return view('location.view');
-});
-
 
 
 
