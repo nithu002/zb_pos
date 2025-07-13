@@ -10,7 +10,7 @@
         <td>{{ $subcategory->category->category }}</td>
 
         <td>
-            <span class="badge fw-medium fs-10 {{ $subcategory->status == 1 ? 'bg-success' : 'bg-info' }}">
+             <span class="badge table-badge  {{ $subcategory->status == 1 ? 'bg-success' : 'bg-info' }} fw-medium fs-10">
                 {{ $subcategory->status == 1 ? 'Active' : 'Deactivate' }}
             </span>
         </td>

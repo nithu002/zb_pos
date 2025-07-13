@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\APP;
 
 use App\Http\Controllers\Controller;
+use App\Models\Unit;
 use Illuminate\Http\Request;
 
 class UnitController extends Controller
@@ -13,6 +14,8 @@ class UnitController extends Controller
     public function index()
     {
         //
+        $units = Unit::with('product_count')->get();
+        return view('app.unit.list', compact('units'));
     }
 
     /**
@@ -29,6 +32,16 @@ class UnitController extends Controller
     public function store(Request $request)
     {
         //
+        $unit =  new Unit();
+        $unit->name = $request->name;
+        if($request->status == 'on') {
+            $unit->status =  1;
+        }else{
+            $unit->status = 0;
+        }
+        $unit->save();
+        return redirect()->back()->with('success', 'Unit created successfully.');
+
     }
 
     /**
@@ -50,16 +63,47 @@ class UnitController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
         //
+        $unit = Unit::findOrFail($request->id);
+        $unit->name = $request->name;
+        if($request->status == 'on') {
+            $unit->status =  1;
+        }else{
+            $unit->status = 0;
+        }
+        $unit->save();
+        return redirect()->back()->with('success', 'Unit updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
         //
+        $unit = Unit::findOrFail($request->id);
+        $unit->delete();
+        return redirect()->back()->with('success', 'Unit deleted successfully.');
+    }
+
+
+    /**
+     * Filter units by status.
+     */
+    public function filterByStatus(Request $request)
+    {
+         $status = $request->status;
+
+        $units = [];
+        if ($status !== null) {
+            $units = Unit::with('product_count')->where('status', $status)->latest()
+                ->get();
+        }
+
+        // Return only the table rows as HTML
+        $html = view('app.unit.table', compact('units'))->render();
+        return response()->json(['html' => $html]);
     }
 }

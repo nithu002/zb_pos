@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\APP;
 
-use App\Models\Variant;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-class VariantController extends Controller
+
+class BrandController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +13,7 @@ class VariantController extends Controller
     public function index()
     {
         //
-        $variants = Variant::latest()->get();
-        return view('app.variant.list', compact('variants'));
+        return view('app.brand.list');
     }
 
     /**
@@ -31,33 +30,14 @@ class VariantController extends Controller
     public function store(Request $request)
     {
         //
-        $request->validate([
-            'variant' => 'required|string|max:255',
-            'variantValue' => 'required|array',
-            'variantValue.*' => 'string|max:255',
-        ]);
-
-        $variant = new Variant([
-            'name' => $request->input('variant'),
-            'values' => json_encode($request->input('variantValue')),
-            'status' => $request->has('status') ? $request->status  : 1,
-        ]);
-
-        $variant->save();
-
-
-        return response()->json([
-            'variant' => $variant->name,
-        ]);
     }
 
-    /**w
+    /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
         //
-
     }
 
     /**
