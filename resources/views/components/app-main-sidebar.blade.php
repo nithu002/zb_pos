@@ -113,7 +113,7 @@
 									<a href="javascript:void(0);"><i class="ti ti-layout-grid fs-16 me-2"></i><span>Sales</span><span class="menu-arrow"></span></a>
 									<ul>
 										<li><a href="online-orders.html">Online Orders</a></li>
-										<li><a href="pos-orders.html">POS Orders</a></li>
+										<li><a href="{{ route('pos') }}">POS Orders</a></li>
 									</ul>
 								</li>
 								<li><a href="invoice.html"><i class="ti ti-file-invoice fs-16 me-2"></i><span>Invoices</span></a></li>

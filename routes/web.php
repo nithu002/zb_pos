@@ -78,6 +78,16 @@ Route::get('/suppliers/{id}', [SupplierController::class, 'show'])->name('suppli
 Route::put('/suppliers/{id}', [SupplierController::class, 'update'])->name('suppliers.update');
 Route::delete('/suppliers/{id}', [SupplierController::class, 'destroy'])->name('suppliers.destroy');
 
+// Location Section
+Route::post('/location/download-pdf', [LocationController::class, 'downloadPdf'])->name('location.downloadPdf');
+Route::post('/location/download-excel', [LocationController::class, 'downloadExcel'])->name('location.downloadExcel');
+Route::get('location', [LocationController::class, 'index'])->name('location');
+
+Route::post('/location', [LocationController::class, 'store'])->name('location.store');
+Route::get('/location/{id}', [LocationController::class, 'show'])->name('location.show');
+Route::put('/location/{id}', [LocationController::class, 'update'])->name('location.update');
+Route::delete('/location/{id}', [LocationController::class, 'destroy'])->name('location.destroy');
+
 
 
 
@@ -105,16 +115,12 @@ Route::post('unit/update', [UnitController::class, 'update'])->name('unit.update
 Route::post('unit/filterByStatus', [UnitController::class, 'filterByStatus'])->name('unit.filterByStatus');
 Route::post('unit/destroy', [UnitController::class, 'destroy'])->name('unit.destroy');
 
+<<<<<<< HEAD
 // Location Routes
+=======
+>>>>>>> c45b1915ca0fe2c5002d5dc26966eb97a528d6de
 
-Route::post('/location/download-pdf', [LocationController::class, 'downloadPdf'])->name('location.downloadPdf');
-Route::post('/location/download-excel', [LocationController::class, 'downloadExcel'])->name('location.downloadExcel');
-Route::get('location', [LocationController::class, 'index'])->name('location');
 
-Route::post('/location', [LocationController::class, 'store'])->name('location.store');
-Route::get('/location/{id}', [LocationController::class, 'show'])->name('location.show');
-Route::put('/location/{id}', [LocationController::class, 'update'])->name('location.update');
-Route::delete('/location/{id}', [LocationController::class, 'destroy'])->name('location.destroy');
 
 // Purchase Routes
 
@@ -145,3 +151,8 @@ Route::resource('barcode', BarcodeContoller::class);
 Route::post('barcodes-print', [BarcodeContoller::class, 'printBarcode'])->name('barcodes.print');
 Route::post('barcode-delete', [BarcodeContoller::class, 'destroy'])->name('barcode.delete');
 
+
+// POS Routes
+Route::get('pos', function () {
+    return view('pos.index');
+})->name('pos');
