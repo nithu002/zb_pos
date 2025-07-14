@@ -10,7 +10,6 @@
                 justify-content: center;
                 margin-top: 10px;
             }
-
             .keypad-btn {
                 background: #111;
                 color: #fff;
@@ -27,7 +26,6 @@
                 outline: none;
                 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
             }
-
             .keypad-btn:active {
                 background: #333;
             }
@@ -64,9 +62,7 @@
                 <div class="row align-items-start pos-wrapper">
                     <!-- Products -->
                     <div class="col-md-12 col-lg-8 col-xl-8">
-
                         <div class="pos-categories tabs_wrapper pb-0">
-
                             <!-- order list -->
                             <div class="product-order-list">
                                 <div class="order-head bg-light d-flex align-items-center justify-content-between w-100">
@@ -90,152 +86,86 @@
                                 </div>
                                 <div class="product-wrap">
                                     <div class="empty-cart">
-                                        <div class="fs-24 mb-1">
-                                            <i class="ti ti-shopping-cart"></i>
-                                        </div>
-                                        <p class="fw-bold">No Products Selected</p>
-                                    </div>
-                                    <div class="product-list align-items-center justify-content-between">
-                                        <div class="d-flex align-items-center product-info" data-bs-toggle="modal"
-                                            data-bs-target="#products">
-                                            <a href="javascript:void(0);" class="pro-img">
-                                                <img src="assets/img/products/pos-product-04.png" alt="Products">
-                                            </a>
-                                            <div class="info">
-                                                <span>PT0005</span>
-                                                <h6><a href="javascript:void(0);">Red Nike Laser</a></h6>
-                                                <p class="fw-bold text-teal">$2000</p>
-                                            </div>
-                                        </div>
-                                        <div class="qty-item text-center">
-                                            <a href="javascript:void(0);"
-                                                class="dec d-flex justify-content-center align-items-center"
-                                                data-bs-toggle="tooltip" data-bs-placement="top" title="minus"><i
-                                                    data-feather="minus-circle" class="feather-14"></i></a>
-                                            <input type="text" class="form-control text-center" name="qty"
-                                                value="4">
-                                            <a href="javascript:void(0);"
-                                                class="inc d-flex justify-content-center align-items-center"
-                                                data-bs-toggle="tooltip" data-bs-placement="top" title="plus"><i
-                                                    data-feather="plus-circle" class="feather-14"></i></a>
-                                        </div>
-                                        <div class="d-flex align-items-center action">
-                                            <a class="btn-icon edit-icon me-1" href="#" data-bs-toggle="modal"
-                                                data-bs-target="#edit-product">
-                                                <i data-feather="edit" class="feather-14"></i>
-                                            </a>
-                                            <a class="btn-icon delete-icon" href="javascript:void(0);"
-                                                data-bs-toggle="modal" data-bs-target="#delete">
-                                                <i data-feather="trash-2" class="feather-14"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product-list align-items-center justify-content-between">
-                                        <div class="d-flex align-items-center product-info" data-bs-toggle="modal"
-                                            data-bs-target="#products">
-                                            <a href="javascript:void(0);" class="pro-img">
-                                                <img src="assets/img/products/pos-product-10.png" alt="Products">
-                                            </a>
-                                            <div class="info">
-                                                <span>PT0235</span>
-                                                <h6><a href="javascript:void(0);">Iphone 14</a></h6>
-                                                <p class="fw-bold text-teal">$3000</p>
-                                            </div>
-                                        </div>
-                                        <div class="qty-item text-center">
-                                            <a href="javascript:void(0);"
-                                                class="dec d-flex justify-content-center align-items-center"
-                                                data-bs-toggle="tooltip" data-bs-placement="top" title="minus"><i
-                                                    data-feather="minus-circle" class="feather-14"></i></a>
-                                            <input type="text" class="form-control text-center" name="qty"
-                                                value="3">
-                                            <a href="javascript:void(0);"
-                                                class="inc d-flex justify-content-center align-items-center"
-                                                data-bs-toggle="tooltip" data-bs-placement="top" title="plus"><i
-                                                    data-feather="plus-circle" class="feather-14"></i></a>
-                                        </div>
-                                        <div class="d-flex align-items-center action">
-                                            <a class="btn-icon edit-icon me-1" href="#" data-bs-toggle="modal"
-                                                data-bs-target="#edit-product">
-                                                <i data-feather="edit" class="feather-14"></i>
-                                            </a>
-                                            <a class="btn-icon delete-icon" href="javascript:void(0);"
-                                                data-bs-toggle="modal" data-bs-target="#delete">
-                                                <i data-feather="trash-2" class="feather-14"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product-list align-items-center justify-content-between">
-                                        <div class="d-flex align-items-center product-info" data-bs-toggle="modal"
-                                            data-bs-target="#products">
-                                            <a href="javascript:void(0);" class="pro-img">
-                                                <img src="assets/img/products/pos-product-09.png" alt="Products">
-                                            </a>
-                                            <div class="info">
-                                                <span>PT0242</span>
-                                                <h6><a href="javascript:void(0);">Timex Black Silver</a></h6>
-                                                <p class="fw-bold text-teal">$1457</p>
-                                            </div>
-                                        </div>
-                                        <div class="qty-item text-center">
-                                            <a href="javascript:void(0);"
-                                                class="dec d-flex justify-content-center align-items-center"
-                                                data-bs-toggle="tooltip" data-bs-placement="top" title="minus"><i
-                                                    data-feather="minus-circle" class="feather-14"></i></a>
-                                            <input type="text" class="form-control text-center" name="qty"
-                                                value="1">
-                                            <a href="javascript:void(0);"
-                                                class="inc d-flex justify-content-center align-items-center"
-                                                data-bs-toggle="tooltip" data-bs-placement="top" title="plus"><i
-                                                    data-feather="plus-circle" class="feather-14"></i></a>
-                                        </div>
-                                        <div class="d-flex align-items-center action">
-                                            <a class="btn-icon edit-icon me-1" href="#" data-bs-toggle="modal"
-                                                data-bs-target="#edit-product">
-                                                <i data-feather="edit" class="feather-14"></i>
-                                            </a>
-                                            <a class="btn-icon delete-icon" href="javascript:void(0);"
-                                                data-bs-toggle="modal" data-bs-target="#delete">
-                                                <i data-feather="trash-2" class="feather-14"></i>
-                                            </a>
+										<div class="mb-1">
+											<img src="{{ asset('assets/img/icons/empty-cart.svg') }}" alt="img">
+										</div>
+										<p class="fw-bold">No Products Selected</p>
+									</div>
+
+                                    <div id="product-list">
+                                         <div class="product-list align-items-center justify-content-between">
+                                            <div class="table-responsive" style="width: 100%;">
+												<table class="table table-borderless">
+													<thead>
+														<tr class="align-items-center " >
+                                                            <th class="bg-transparent fw-bold align-items-center">#</th>
+															<th class="bg-transparent fw-bold">Product</th>
+															<th class="bg-transparent fw-bold">QTY</th>
+															<th class="bg-transparent fw-bold">Dis</th>
+															<th class="bg-transparent fw-bold">Net</th>
+															<th class="bg-transparent fw-bold">Price</th>
+															<th class="bg-transparent fw-bold text-end"></th>
+														</tr>
+													</thead>
+													<tbody >
+														<tr class="align-items-center ">
+                                                            <td>
+                                                                <div class="d-flex align-items-center mb-1 product-info" style="max-width: 50%; max-height: 50%;">
+                                                                    <a href="javascript:void(0);" class="pro-img">
+                                                                        <img src="assets/img/products/pos-product-04.png"  alt="Products">
+                                                                    </a>
+                                                                </div>
+                                                            </td>
+															<td>
+
+																<div class="d-flex align-items-center mb-1 product-info">
+                                                                    {{--  --}}
+																	<h6 class="fs-16 fw-medium"><a href="#" data-bs-toggle="modal" data-bs-target="#products">Iphone 11S</a></h6>
+																	<a href="#" class="ms-2 edit-icon"  data-bs-toggle="modal" data-bs-target="#edit-product"><i class="ti ti-edit"></i></a>
+																</div>
+                                                                <div class="info">
+                                                                    <span>PT0005</span>
+                                                                    <p class="fw-bold text-teal">$2000</p>
+                                                                </div>
+															</td>
+															<td>
+																<div class="qty-item m-0">
+																	<a href="javascript:void(0);" class="dec d-flex justify-content-center align-items-center" data-bs-toggle="tooltip" data-bs-placement="top" title="minus"><i data-feather="minus-circle" class="feather-14"></i></a>
+																	<input type="text" class="form-control text-center" name="qty" value="4">
+																	<a href="javascript:void(0);" class="inc d-flex justify-content-center align-items-center" data-bs-toggle="tooltip" data-bs-placement="top" title="plus"><i data-feather="plus-circle" class="feather-14"></i></a>
+																</div>
+															</td>
+                                                            <td class="fw-bold text-teal">
+                                                                20%
+                                                            </td>
+
+                                                            <td class="info">
+                                                                <p class="fw-bold text-teal">$2000</p>
+                                                            </td>
+                                                            <td class="info">
+                                                                <p class="fw-bold text-teal">$2000</p>
+                                                            </td>
+
+
+															<td class="text-end  align-items-center action">
+                                                                 <a class="btn-icon delete-icon" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete">
+																	<i class="ti ti-edit" style="font-size: 200%;"></i>
+																</a>
+                                                                <a class="btn-icon delete-icon" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete">
+																	<i class="ti ti-trash" style="font-size: 200%;"></i>
+																</a>
+															</td>
+
+														</tr>
+													</tbody>
+												</table>
+											</div>
                                         </div>
                                     </div>
-                                    <div class="product-list align-items-center justify-content-between">
-                                        <div class="d-flex align-items-center product-info" data-bs-toggle="modal"
-                                            data-bs-target="#products">
-                                            <a href="javascript:void(0);" class="pro-img">
-                                                <img src="assets/img/products/pos-product-08.png" alt="Products">
-                                            </a>
-                                            <div class="info">
-                                                <span>PT0005</span>
-                                                <h6><a href="javascript:void(0);">SWAGME</a></h6>
-                                                <p class="fw-bold text-teal">$6587</p>
-                                            </div>
-                                        </div>
-                                        <div class="qty-item text-center">
-                                            <a href="javascript:void(0);"
-                                                class="dec d-flex justify-content-center align-items-center"
-                                                data-bs-toggle="tooltip" data-bs-placement="top" title="minus"><i
-                                                    data-feather="minus-circle" class="feather-14"></i></a>
-                                            <input type="text" class="form-control text-center" name="qty"
-                                                value="1">
-                                            <a href="javascript:void(0);"
-                                                class="inc d-flex justify-content-center align-items-center"
-                                                data-bs-toggle="tooltip" data-bs-placement="top" title="plus"><i
-                                                    data-feather="plus-circle" class="feather-14"></i></a>
-                                        </div>
-                                        <div class="d-flex align-items-center action">
-                                            <a class="btn-icon edit-icon me-1" href="#" data-bs-toggle="modal"
-                                                data-bs-target="#edit-product">
-                                                <i data-feather="edit" class="feather-14"></i>
-                                            </a>
-                                            <a class="btn-icon delete-icon" href="javascript:void(0);"
-                                                data-bs-toggle="modal" data-bs-target="#delete">
-                                                <i data-feather="trash-2" class="feather-14"></i>
-                                            </a>
-                                        </div>
-                                    </div>
+
+
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -252,8 +182,9 @@
                                         <span class="input-icon-addon">
                                             <i class="ti ti-search"></i>
                                         </span>
-                                        <input type="text" class="form-control"
-                                            placeholder="Scan Item or Search Product">
+                                        <input type="hidden" id="orderID" value="{{ $orderId }}">
+                                        <input type="text" class="form-control" id="barcodeInput"
+                                            placeholder="Scan Item or Search Product" autofocus>
                                     </div>
                                     <a href="javascript:void(0);" class="btn btn-md btn-indigo"><i
                                             class="ti ti-scan me-1"></i>Scan</a>
@@ -299,15 +230,15 @@
 
                                 <div class="order-total d-flex align-items-center justify-content-between">
                                     <table class="table table-responsive table-borderless">
-                                        <!-- <tr>
-                    <td>Sub Total</td>
-                    <td class="text-end">$60,454</td>
-                   </tr>
+                                   <!-- <tr>
+                                            <td>Sub Total</td>
+                                            <td class="text-end">$60,454</td>
+                                        </tr>
 
-                   <tr>
-                    <td>Shipping</td>
-                    <td class="text-end">$40.21</td>
-                   </tr> -->
+                                        <tr>
+                                            <td>Shipping</td>
+                                            <td class="text-end">$40.21</td>
+                                        </tr> -->
                                         <tr>
                                             <td>Sub Total</td>
                                             <td class="text-end">$60,454</td>
@@ -584,7 +515,6 @@
             </div>
         </div>
         <!-- /Print Receipt -->
-
         <!-- Barcode -->
         <div class="modal fade modal-default" id="barcode">
             <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -1841,7 +1771,6 @@
             </div>
         </div>
         <!-- /Products -->
-
         <div class="modal fade" id="create" tabindex="-1" aria-labelledby="create" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -1902,7 +1831,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Hold -->
         <div class="modal fade modal-default pos-modal" id="hold-order" aria-labelledby="hold-order">
             <div class="modal-dialog modal-dialog-centered">
@@ -1936,7 +1864,6 @@
             </div>
         </div>
         <!-- /Hold -->
-
         <!-- Edit Product -->
         <div class="modal fade modal-default pos-modal" id="edit-product" aria-labelledby="edit-product">
             <div class="modal-dialog modal-dialog-centered">
@@ -2027,7 +1954,6 @@
             </div>
         </div>
         <!-- /Edit Product -->
-
         <!-- Delete Product -->
         <div class="modal fade modal-default" id="delete" aria-labelledby="delete">
             <div class="modal-dialog modal-dialog-centered">
@@ -2055,7 +1981,6 @@
             </div>
         </div>
         <!-- /Delete Product -->
-
         <!-- Reset -->
         <div class="modal fade modal-default" id="reset" aria-labelledby="reset">
             <div class="modal-dialog modal-dialog-centered">
@@ -2082,7 +2007,6 @@
             </div>
         </div>
         <!-- /Reset -->
-
         <!-- Recent Transactions -->
         <div class="modal fade pos-modal" id="recents" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -2991,7 +2915,6 @@
             </div>
         </div>
         <!-- /Recent Transactions -->
-
         <!-- Orders -->
         <div class="modal fade pos-modal" id="orders" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-md modal-dialog-centered" role="document">
@@ -3232,7 +3155,6 @@
             </div>
         </div>
         <!-- /Orders -->
-
         <!-- Scan -->
         <div class="modal fade modal-default" id="scan-payment">
             <div class="modal-dialog modal-dialog-centered">
@@ -3253,7 +3175,6 @@
             </div>
         </div>
         <!-- /Scan -->
-
         <!-- Payment Cash -->
         <div class="modal fade modal-default" id="payment-cash">
             <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -3399,7 +3320,6 @@
             </div>
         </div>
         <!-- /Payment Cash  -->
-
         <!-- Payment Card  -->
         <div class="modal fade modal-default" id="payment-card">
             <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -3547,7 +3467,6 @@
             </div>
         </div>
         <!-- /Payment Card  -->
-
         <!-- Calculator -->
         <div class="modal fade pos-modal" id="calculator" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-md modal-dialog-centered" role="document">
@@ -3643,7 +3562,6 @@
             </div>
         </div>
         <!-- /Calculator -->
-
         <!-- Cash Register Details -->
         <div class="modal fade pos-modal" id="cash-register" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-md modal-dialog-centered" role="document">
@@ -3696,7 +3614,6 @@
             </div>
         </div>
         <!-- /Cash Register Details -->
-
         <!-- Today's Sale -->
         <div class="modal fade pos-modal" id="today-sale" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-md modal-dialog-centered" role="document">
@@ -3773,7 +3690,6 @@
             </div>
         </div>
         <!-- /Today's Sale -->
-
         <!-- Today's Profit -->
         <div class="modal fade pos-modal" id="today-profit" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-md modal-dialog-centered" role="document">
@@ -3871,4 +3787,57 @@
         </div>
         <!-- /Today's Profit -->
     @endsection
+
+
+    @push('js')
+
+
+    <script>
+        const routes = {
+            scan: @json(route('pos.scan')),
+
+        };
+
+        const csrfToken = '{{ csrf_token() }}';
+
+        function cartRefresh()
+        {
+               $('#product-list').load(location.href + " #product-list");
+        }
+
+    </script>
+
+    <script>
+
+        $(document).ready(function () {
+              $('#barcodeInput').focus();
+
+                $('#barcodeInput').keypress(function (e) {
+                    if (e.which === 13) {
+                    const barcode = $(this).val();
+                    const orderID = $('#orderID').val();
+
+                    $.post(routes.scan, {
+                        _token: csrfToken,
+                        barcode: barcode,
+                        orderID: orderID,
+                    }, function (res) {
+                        if (res.success) {
+                            cartRefresh();
+                            // beepSound();
+                            toastr.success('Product added successfully');
+                        } else {
+
+                            toastr.error(res.message || 'Product not found');
+                        }
+                        $('#barcodeInput').val('').focus();
+                    });
+                    }
+                });
+        });
+    </script>
+
+    @endpush
+
+
 </x-pos-layout>

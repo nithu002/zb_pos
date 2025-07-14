@@ -12,6 +12,7 @@ use App\Http\Controllers\APP\ProductsController;
 use App\Http\Controllers\APP\CustomerController;
 use App\Http\Controllers\APP\BrandController;
 use App\Http\Controllers\APP\WarrantyController;
+use App\Http\Controllers\POS\POSController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -134,6 +135,6 @@ Route::post('barcode-delete', [BarcodeContoller::class, 'destroy'])->name('barco
 
 
 // POS Routes
-Route::get('pos', function () {
-    return view('pos.index');
-})->name('pos');
+
+Route::get('pos', [POSController::class, 'index'])->name('pos');
+Route::post('pos/scan', [POSController::class, 'scan'])->name('pos.scan');
