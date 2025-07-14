@@ -196,9 +196,9 @@
 											<li><a href="discount.html">Discount</a></li>
 										</ul>
 									</li>
-									<li><a href="purchase-list.html"><span>Purchases</span></a></li>
-									<li><a href="purchase-order-report.html"><span>Purchase Order</span></a></li>
-									<li><a href="purchase-returns.html"><span>Purchase Return</span></a></li>
+									<li><a href="{{route('purchase')}}"><span>Purchases</span></a></li>
+									<li><a href="{{route('purchase.order')}}"><span>Purchase Order</span></a></li>
+									<li><a href="{{route('purchase.return')}}"><span>Purchase Return</span></a></li>
 									<li class="submenu">
 										<a href="javascript:void(0);"><span>Expenses</span><span class="menu-arrow"></span></a>
 										<ul>

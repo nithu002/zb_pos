@@ -12,8 +12,7 @@
 
     @endsection
 
-
-
+        
 
     @push('js')
 

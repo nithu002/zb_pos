@@ -148,9 +148,9 @@
 						<li class="submenu-open">
 							<h6 class="submenu-hdr">Purchases</h6>
 							<ul>
-								<li><a href="purchase-list.html"><i class="ti ti-shopping-bag fs-16 me-2"></i><span>Purchases</span></a></li>
-								<li><a href="purchase-order-report.html"><i class="ti ti-file-unknown fs-16 me-2"></i><span>Purchase Order</span></a></li>
-								<li><a href="purchase-returns.html"><i class="ti ti-file-upload fs-16 me-2"></i><span>Purchase Return</span></a></li>
+								<li><a href="{{route('purchase')}}"><i class="ti ti-shopping-bag fs-16 me-2"></i><span>Purchases</span></a></li>
+								<li><a href="{{route('purchase.order')}}"><i class="ti ti-file-unknown fs-16 me-2"></i><span>Purchase Order</span></a></li>
+								<li><a href="{{route('purchase.return')}}"><i class="ti ti-file-upload fs-16 me-2"></i><span>Purchase Return</span></a></li>
 							</ul>
 						</li>
 						<li class="submenu-open">

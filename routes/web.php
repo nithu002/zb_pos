@@ -3,6 +3,9 @@
 use App\Http\Controllers\APP\BarcodeContoller;
 use App\Http\Controllers\App\CategoryController;
 use App\Http\Controllers\APP\LocationController;
+use App\Http\Controllers\APP\PurchaseController;
+use App\Http\Controllers\APP\PurchaseOrderController;
+use App\Http\Controllers\APP\PurchaseReturnController;
 use App\Http\Controllers\APP\SubCategoriesController;
 use App\Http\Controllers\App\SupplierController;
 use App\Http\Controllers\APP\UnitController;
@@ -102,7 +105,7 @@ Route::post('unit/update', [UnitController::class, 'update'])->name('unit.update
 Route::post('unit/filterByStatus', [UnitController::class, 'filterByStatus'])->name('unit.filterByStatus');
 Route::post('unit/destroy', [UnitController::class, 'destroy'])->name('unit.destroy');
 
-// Location view
+// Location Routes
 
 Route::post('/location/download-pdf', [LocationController::class, 'downloadPdf'])->name('location.downloadPdf');
 Route::post('/location/download-excel', [LocationController::class, 'downloadExcel'])->name('location.downloadExcel');
@@ -113,6 +116,18 @@ Route::get('/location/{id}', [LocationController::class, 'show'])->name('locatio
 Route::put('/location/{id}', [LocationController::class, 'update'])->name('location.update');
 Route::delete('/location/{id}', [LocationController::class, 'destroy'])->name('location.destroy');
 
+// Purchase Routes
+
+Route::get('purchase', [PurchaseController::class,'index'])->name(  'purchase');
+
+
+// PurchaseOrder Routes
+
+Route::get('purchase_order', [PurchaseOrderController::class,'index'])->name(  'purchase.order');
+
+// PurchaseRetun Route 
+
+Route::get('purchase_return', [PurchaseReturnController::class,'index'])->name(  'purchase.return');
 
 
 //Variant Routes
