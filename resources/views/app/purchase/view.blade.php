@@ -22,6 +22,27 @@
             .modal:not(.show) {
                 display: none !important;
             }
+
+            .autocomplete-dropdown {
+                background: #fff;
+                border: 1px solid #ccc;
+                max-height: 200px;
+                overflow-y: auto;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .autocomplete-dropdown .dropdown-item {
+                padding: 8px 12px;
+                border-bottom: 1px solid #eee;
+            }
+
+            .autocomplete-dropdown .dropdown-item:last-child {
+                border-bottom: none;
+            }
+
+            .autocomplete-dropdown .dropdown-item:hover {
+                background-color: #f8f9fa;
+            }
         </style>
     @endpush
 
@@ -78,18 +99,18 @@
                             <a href="javascript:void(0);"
                                 class="dropdown-toggle btn btn-white btn-md d-inline-flex align-items-center"
                                 data-bs-toggle="dropdown">
-                                Payment Status
+                                Status
                             </a>
                             <ul class="dropdown-menu  dropdown-menu-end p-3">
                                 <li>
-                                    <a href="javascript:void(0);" class="dropdown-item rounded-1">Paid</a>
+                                    <a href="javascript:void(0);" class="dropdown-item rounded-1">Received</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:void(0);" class="dropdown-item rounded-1">Unpaid</a>
+                                    <a href="javascript:void(0);" class="dropdown-item rounded-1">Pending</a>
                                 </li>
-                                <li>
+                                {{-- <li>
                                     <a href="javascript:void(0);" class="dropdown-item rounded-1">Overdue</a>
-                                </li>
+                                </li> --}}
                             </ul>
                         </div>
                     </div>
@@ -110,335 +131,64 @@
                                     <th>Date</th>
                                     <th>Status</th>
                                     <th>Total</th>
-                                    <th>Paid</th>
-                                    <th>Due</th>
-                                    <th>Payment Status</th>
+                                    <th>Quantity</th>
+                                    {{-- <th>Due</th> --}}
+                                    {{-- <th>Payment Status</th> --}}
                                     <th class="no-sort"></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <label class="checkboxs">
-                                            <input type="checkbox">
-                                            <span class="checkmarks"></span>
-                                        </label>
-                                    </td>
-                                    <td>Electro Mart</td>
-                                    <td>PT001 </td>
-                                    <td>24 Dec 2024</td>
-                                    <td><span class="badges status-badge fs-10 p-1 px-2 rounded-1">Received</span></td>
-                                    <td>$1000</td>
-                                    <td>$1000</td>
-                                    <td>$0.00</td>
-                                    <td><span class="p-1 pe-2 rounded-1 text-success bg-success-transparent fs-10"><i
-                                                class="ti ti-point-filled me-1 fs-11"></i>Paid</span></td>
-                                    <td class="action-table-data">
-                                        <div class="edit-delete-action">
-                                            <a class="me-2 p-2" href="javascript:void(0);">
-                                                <i data-feather="eye" class="action-eye"></i>
-                                            </a>
-                                            <a class="me-2 p-2" data-bs-toggle="modal" data-bs-target="#edit-purchase">
-                                                <i data-feather="edit" class="feather-edit"></i>
-                                            </a>
-                                            <a data-bs-toggle="modal" data-bs-target="#delete-modal" class="p-2"
-                                                href="javascript:void(0);">
-                                                <i data-feather="trash-2" class="feather-trash-2"></i>
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label class="checkboxs">
-                                            <input type="checkbox">
-                                            <span class="checkmarks"></span>
-                                        </label>
-                                    </td>
-                                    <td>Quantum Gadgets</td>
-                                    <td>PT002</td>
-                                    <td>10 Dec 2024</td>
-                                    <td><span
-                                            class="badges status-badge badge-pending fs-10 p-1 px-2 rounded-1">Pending</span>
-                                    </td>
-                                    <td>$1500</td>
-                                    <td>$0.00</td>
-                                    <td>$1500</td>
-                                    <td><span class="p-1 pe-2 rounded-1 text-danger bg-danger-transparent fs-10"><i
-                                                class="ti ti-point-filled me-1 fs-11"></i>Unpaid</span></td>
-                                    <td class="action-table-data">
-                                        <div class="edit-delete-action">
-                                            <a class="me-2 p-2" href="javascript:void(0);">
-                                                <i data-feather="eye" class="action-eye"></i>
-                                            </a>
-                                            <a class="me-2 p-2" data-bs-toggle="modal" data-bs-target="#edit-purchase">
-                                                <i data-feather="edit" class="feather-edit"></i>
-                                            </a>
-                                            <a data-bs-toggle="modal" data-bs-target="#delete-modal" class="p-2"
-                                                href="javascript:void(0);">
-                                                <i data-feather="trash-2" class="feather-trash-2"></i>
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label class="checkboxs">
-                                            <input type="checkbox">
-                                            <span class="checkmarks"></span>
-                                        </label>
-                                    </td>
-                                    <td>Prime Bazaar</td>
-                                    <td>PT003</td>
-                                    <td>27 Nov 2024</td>
-                                    <td><span class="badges status-badge fs-10 p-1 px-2 rounded-1">Received</span></td>
-                                    <td>$1500</td>
-                                    <td>$1800</td>
-                                    <td>$0.00</td>
-                                    <td><span class="p-1 pe-2 rounded-1 text-success bg-success-transparent fs-10"><i
-                                                class="ti ti-point-filled me-1 fs-11"></i>Paid</span></td>
-                                    <td class="action-table-data">
-                                        <div class="edit-delete-action">
-                                            <a class="me-2 p-2" href="javascript:void(0);">
-                                                <i data-feather="eye" class="action-eye"></i>
-                                            </a>
-                                            <a class="me-2 p-2" data-bs-toggle="modal" data-bs-target="#edit-purchase">
-                                                <i data-feather="edit" class="feather-edit"></i>
-                                            </a>
-                                            <a data-bs-toggle="modal" data-bs-target="#delete-modal" class="p-2"
-                                                href="javascript:void(0);">
-                                                <i data-feather="trash-2" class="feather-trash-2"></i>
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label class="checkboxs">
-                                            <input type="checkbox">
-                                            <span class="checkmarks"></span>
-                                        </label>
-                                    </td>
-                                    <td>Gadget World</td>
-                                    <td>PT004</td>
-                                    <td>18 Nov 2024</td>
-                                    <td><span
-                                            class="badges status-badge bg-warning fs-10 p-1 px-2 rounded-1">Ordered</span>
-                                    </td>
-                                    <td>$2000</td>
-                                    <td>$1000</td>
-                                    <td>$1000</td>
-                                    <td><span class="p-1 pe-2 rounded-1 text-warning bg-warning-transparent fs-10"><i
-                                                class="ti ti-point-filled me-1 fs-11"></i>Overdue</span></td>
-                                    <td class="action-table-data">
-                                        <div class="edit-delete-action">
-                                            <a class="me-2 p-2" href="javascript:void(0);">
-                                                <i data-feather="eye" class="action-eye"></i>
-                                            </a>
-                                            <a class="me-2 p-2" data-bs-toggle="modal" data-bs-target="#edit-purchase">
-                                                <i data-feather="edit" class="feather-edit"></i>
-                                            </a>
-                                            <a data-bs-toggle="modal" data-bs-target="#delete-modal" class="p-2"
-                                                href="javascript:void(0);">
-                                                <i data-feather="trash-2" class="feather-trash-2"></i>
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
+                                @foreach ($purchases as $purchase)
+                                    <tr>
+                                        <td>
+                                            <label class="checkboxs">
+                                                <input type="checkbox">
+                                                <span class="checkmarks"></span>
+                                            </label>
+                                        </td>
+                                        <td>{{ $purchase->supplier->company_name ?? 'N/A' }}</td>
+                                        <td>{{ $purchase->reference }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($purchase->purchase_date)->format('d M Y') }}</td>
+                                        <td>
+                                            <span
+                                                class="badges status-badge fs-10 p-1 px-2 rounded-1 {{ $purchase->status === 'Pending' ? 'badge-pending' : '' }}">
+                                                {{ $purchase->status }}
+                                            </span>
+                                        </td>
+                                        <td>${{ number_format($purchase->total, 2) }}</td>
+                                        @foreach ($purchase->items as $item)
+                                            <td>
+                                                {{ $item->qty }}
+                                            </td>
+                                        @endforeach
+                                        {{-- If you have payments, replace this later --}}
 
-                                <tr>
-                                    <td>
-                                        <label class="checkboxs">
-                                            <input type="checkbox">
-                                            <span class="checkmarks"></span>
-                                        </label>
-                                    </td>
-                                    <td>Volt Vault</td>
-                                    <td>PT005</td>
-                                    <td>06 Nov 2024</td>
-                                    <td><span class="badges status-badge fs-10 p-1 px-2 rounded-1">Received</span></td>
-                                    <td>$800</td>
-                                    <td>$800</td>
-                                    <td>$0.00</td>
-                                    <td><span class="p-1 pe-2 rounded-1 text-success bg-success-transparent fs-10"><i
-                                                class="ti ti-point-filled me-1 fs-11"></i>Paid</span></td>
-                                    <td class="action-table-data">
-                                        <div class="edit-delete-action">
-                                            <a class="me-2 p-2" href="javascript:void(0);">
-                                                <i data-feather="eye" class="action-eye"></i>
-                                            </a>
-                                            <a class="me-2 p-2" data-bs-toggle="modal" data-bs-target="#edit-purchase">
-                                                <i data-feather="edit" class="feather-edit"></i>
-                                            </a>
-                                            <a data-bs-toggle="modal" data-bs-target="#delete-modal" class="p-2"
-                                                href="javascript:void(0);">
-                                                <i data-feather="trash-2" class="feather-trash-2"></i>
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label class="checkboxs">
-                                            <input type="checkbox">
-                                            <span class="checkmarks"></span>
-                                        </label>
-                                    </td>
-                                    <td>Elite Retail</td>
-                                    <td>PT006</td>
-                                    <td>25 Oct 2024</td>
-                                    <td><span
-                                            class="badges status-badge badge-pending fs-10 p-1 px-2 rounded-1">Pending</span>
-                                    </td>
-                                    <td>$750</td>
-                                    <td>$0.00</td>
-                                    <td>$750</td>
-                                    <td><span class="p-1 pe-2 rounded-1 text-danger bg-danger-transparent fs-10"><i
-                                                class="ti ti-point-filled me-1 fs-11"></i>Unpaid</span></td>
-                                    <td class="action-table-data">
-                                        <div class="edit-delete-action">
-                                            <a class="me-2 p-2" href="javascript:void(0);">
-                                                <i data-feather="eye" class="action-eye"></i>
-                                            </a>
-                                            <a class="me-2 p-2" data-bs-toggle="modal" data-bs-target="#edit-purchase">
-                                                <i data-feather="edit" class="feather-edit"></i>
-                                            </a>
-                                            <a data-bs-toggle="modal" data-bs-target="#delete-modal" class="p-2"
-                                                href="javascript:void(0);">
-                                                <i data-feather="trash-2" class="feather-trash-2"></i>
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label class="checkboxs">
-                                            <input type="checkbox">
-                                            <span class="checkmarks"></span>
-                                        </label>
-                                    </td>
-                                    <td>Prime Mart</td>
-                                    <td>PT007</td>
-                                    <td>14 Oct 2024</td>
-                                    <td><span class="badges status-badge fs-10 p-1 px-2 rounded-1">Received</span></td>
-                                    <td>$1300</td>
-                                    <td>$1300</td>
-                                    <td>$0.00</td>
-                                    <td><span class="p-1 pe-2 rounded-1 text-success bg-success-transparent fs-10"><i
-                                                class="ti ti-point-filled me-1 fs-11"></i>Paid</span></td>
-                                    <td class="action-table-data">
-                                        <div class="edit-delete-action">
-                                            <a class="me-2 p-2" href="javascript:void(0);">
-                                                <i data-feather="eye" class="action-eye"></i>
-                                            </a>
-                                            <a class="me-2 p-2" data-bs-toggle="modal" data-bs-target="#edit-purchase">
-                                                <i data-feather="edit" class="feather-edit"></i>
-                                            </a>
-                                            <a data-bs-toggle="modal" data-bs-target="#delete-modal" class="p-2"
-                                                href="javascript:void(0);">
-                                                <i data-feather="trash-2" class="feather-trash-2"></i>
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label class="checkboxs">
-                                            <input type="checkbox">
-                                            <span class="checkmarks"></span>
-                                        </label>
-                                    </td>
-                                    <td>NeoTech Store</td>
-                                    <td>PT008</td>
-                                    <td>03 Oct 2024</td>
-                                    <td><span class="badges status-badge fs-10 p-1 px-2 rounded-1">Received</span></td>
-                                    <td>$1100</td>
-                                    <td>$1100</td>
-                                    <td>$0.00</td>
-                                    <td><span class="p-1 pe-2 rounded-1 text-success bg-success-transparent fs-10"><i
-                                                class="ti ti-point-filled me-1 fs-11"></i>Paid</span></td>
-                                    <td class="action-table-data">
-                                        <div class="edit-delete-action">
-                                            <a class="me-2 p-2" href="javascript:void(0);">
-                                                <i data-feather="eye" class="action-eye"></i>
-                                            </a>
-                                            <a class="me-2 p-2" data-bs-toggle="modal" data-bs-target="#edit-purchase">
-                                                <i data-feather="edit" class="feather-edit"></i>
-                                            </a>
-                                            <a data-bs-toggle="modal" data-bs-target="#delete-modal" class="p-2"
-                                                href="javascript:void(0);">
-                                                <i data-feather="trash-2" class="feather-trash-2"></i>
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label class="checkboxs">
-                                            <input type="checkbox">
-                                            <span class="checkmarks"></span>
-                                        </label>
-                                    </td>
-                                    <td>Urban Mart</td>
-                                    <td>PT009</td>
-                                    <td>20 Sep 2024</td>
-                                    <td><span
-                                            class="badges status-badge bg-warning fs-10 p-1 px-2 rounded-1">Ordered</span>
-                                    </td>
-                                    <td>$2300</td>
-                                    <td>$2300</td>
-                                    <td>$0.00</td>
-                                    <td><span class="p-1 pe-2 rounded-1 text-success bg-success-transparent fs-10"><i
-                                                class="ti ti-point-filled me-1 fs-11"></i>Paid</span></td>
-                                    <td class="action-table-data">
-                                        <div class="edit-delete-action">
-                                            <a class="me-2 p-2" href="javascript:void(0);">
-                                                <i data-feather="eye" class="action-eye"></i>
-                                            </a>
-                                            <a class="me-2 p-2" data-bs-toggle="modal" data-bs-target="#edit-purchase">
-                                                <i data-feather="edit" class="feather-edit"></i>
-                                            </a>
-                                            <a data-bs-toggle="modal" data-bs-target="#delete-modal" class="p-2"
-                                                href="javascript:void(0);">
-                                                <i data-feather="trash-2" class="feather-trash-2"></i>
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label class="checkboxs">
-                                            <input type="checkbox">
-                                            <span class="checkmarks"></span>
-                                        </label>
-                                    </td>
-                                    <td>Travel Mart</td>
-                                    <td>PT010</td>
-                                    <td>10 Sep 2024</td>
-                                    <td><span
-                                            class="badges status-badge badge-pending fs-10 p-1 px-2 rounded-1">Pending</span>
-                                    </td>
-                                    <td>$1700</td>
-                                    <td>$1700</td>
-                                    <td>$0.00</td>
-                                    <td><span class="p-1 pe-2 rounded-1 text-success bg-success-transparent fs-10"><i
-                                                class="ti ti-point-filled me-1 fs-11"></i>Paid</span></td>
-                                    <td class="action-table-data">
-                                        <div class="edit-delete-action">
-                                            <a class="me-2 p-2" href="javascript:void(0);">
-                                                <i data-feather="eye" class="action-eye"></i>
-                                            </a>
-                                            <a class="me-2 p-2" data-bs-toggle="modal" data-bs-target="#edit-purchase">
-                                                <i data-feather="edit" class="feather-edit"></i>
-                                            </a>
-                                            <a data-bs-toggle="modal" data-bs-target="#delete-modal" class="p-2"
-                                                href="javascript:void(0);">
-                                                <i data-feather="trash-2" class="feather-trash-2"></i>
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
+                                        {{-- <td>${{ number_format($purchase->total, 2) }}</td> Assuming all due --}}
+                                        {{-- <td>
+                                            <span
+                                                class="p-1 pe-2 rounded-1 {{ $purchase->status === 'Pending' ? 'text-danger bg-danger-transparent' : 'text-success bg-success-transparent' }} fs-10">
+                                                <i class="ti ti-point-filled me-1 fs-11"></i>
+                                                {{ $purchase->status === 'Pending' ? 'Unpaid' : 'Paid' }}
+                                            </span>
+                                        </td> --}}
+                                        <td class="action-table-data">
+                                            <div class="edit-delete-action">
+                                                <a class="me-2 p-2" href="#">
+                                                    <i data-feather="eye" class="action-eye"></i>
+                                                </a>
+                                                <a class="me-2 p-2" data-bs-toggle="modal" data-bs-target="#edit-purchase">
+                                                    <i data-feather="edit" class="feather-edit"></i>
+                                                </a>
+                                                <a class="p-2" data-bs-toggle="modal" data-bs-target="#delete-modal"
+                                                    href="javascript:void(0);">
+                                                    <i data-feather="trash-2" class="feather-trash-2"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
+
                         </table>
                     </div>
 
@@ -449,155 +199,9 @@
 
 
         <!-- Add Purchase -->
-        {{-- <div class="modal fade" id="add-purchase">
-            <div class="modal-dialog purchase modal-dialog-centered ">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <div class="page-title">
-                            <h4>Add Purchase</h4>
-                        </div>
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form action="https://dreamspos.dreamstechnologies.com/html/template/purchase-list.html">
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col-lg-4 col-md-6 col-sm-12">
-                                    <div class="mb-3 add-product">
-                                        <label class="form-label">Supplier Name<span
-                                                class="text-danger ms-1">*</span></label>
-                                        <div class="row">
-                                            <div class="col-lg-10 col-sm-10 col-10">
-                                                <select class="select">
-                                                    <option>Select</option>
-                                                    <option>Apex Computers</option>
-                                                    <option>Dazzle Shoes</option>
-                                                    <option>Best Accessories</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-lg-2 col-sm-2 col-2 ps-0">
-                                                <div class="add-icon tab">
-                                                    <a href="javascript:void(0);" data-bs-toggle="modal"
-                                                        data-bs-target="#add_customer"><i data-feather="plus-circle"
-                                                            class="feather-plus-circles"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 col-sm-12">
-                                    <div class="mb-3">
-                                        <label class="form-label">Date<span class="text-danger ms-1">*</span></label>
 
-                                        <div class="input-groupicon calender-input">
-                                            <i data-feather="calendar" class="info-img"></i>
-                                            <input type="text" class="datetimepicker form-control p-2"
-                                                placeholder="dd/mm/yyyy">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-sm-12">
-                                    <div class="mb-3">
-                                        <label class="form-label">Reference<span class="text-danger ms-1">*</span></label>
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="mb-3">
-                                        <label class="form-label">Product<span class="text-danger ms-1">*</span></label>
-                                        <input type="text" class="form-control" placeholder="Search Product">
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="modal-body-table mt-3">
-                                        <div class="table-responsive">
-                                            <table class="table datatable rounded-1">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="bg-secondary-transparent p-3">Product</th>
-                                                        <th class="bg-secondary-transparent p-3">Qty</th>
-                                                        <th class="bg-secondary-transparent p-3">Purchase Price($)</th>
-                                                        <th class="bg-secondary-transparent p-3">Discount($)</th>
-                                                        <th class="bg-secondary-transparent p-3">Tax(%)</th>
-                                                        <th class="bg-secondary-transparent p-3">Tax Amount($)</th>
-                                                        <th class="bg-secondary-transparent p-3">Unit Cost($)</th>
-                                                        <th class="bg-secondary-transparent p-3">Total Cost(%)</th>
-                                                    </tr>
-                                                </thead>
-
-                                                <tbody>
-                                                    <tr>
-                                                        <td class="p-0"></td>
-                                                        <td class="p-0"></td>
-                                                        <td class="p-0"></td>
-                                                        <td class="p-0"></td>
-                                                        <td class="p-0"></td>
-                                                        <td class="p-0"></td>
-                                                        <td class="p-0"></td>
-                                                        <td class="p-0"></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-3 col-md-6 col-sm-12">
-                                        <div class="mb-3">
-                                            <label class="form-label">Order Tax<span
-                                                    class="text-danger ms-1">*</span></label>
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6 col-sm-12">
-                                        <div class="mb-3">
-                                            <label class="form-label">Discount<span
-                                                    class="text-danger ms-1">*</span></label>
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6 col-sm-12">
-                                        <div class="mb-3">
-                                            <label class="form-label">Shipping<span
-                                                    class="text-danger ms-1">*</span></label>
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-6 col-sm-12">
-                                        <div class="mb-3">
-                                            <label class="form-label">Status<span
-                                                    class="text-danger ms-1">*</span></label>
-                                            <select class="select">
-                                                <option>Select</option>
-                                                <option>Received</option>
-                                                <option>Pending</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-12 mt-3">
-                                <div class="mb-3 summer-description-box">
-                                    <label class="form-label">Description</label>
-                                    <div id="summernote"></div>
-                                    <p class="mt-1">Maximum 60 Words</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn me-2 btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div> --}}
         <div class="modal fade" id="add-purchase">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-dialog modal-fullscreen modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title">Add Purchase</h4>
@@ -605,22 +209,30 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form>
+                    <form method="POST" action="{{ route('purchases.store') }}" id="purchaseForm">
+                        @csrf
                         <div class="modal-body">
                             <div class="row g-3">
                                 <div class="col-lg-4 col-md-6">
                                     <label class="form-label">Supplier Name<span class="text-danger">*</span></label>
                                     <div class="input-group">
-                                        <select class="form-select">
-                                            <option>Select</option>
-                                            <option>Apex Computers</option>
-                                            <option>Dazzle Shoes</option>
+                                        <select class="form-select" name="supplier_id" required>
+                                            <option value="">Select</option>
+                                            @foreach ($suppliers as $supplier)
+                                                <option value="{{ $supplier->id }}">{{ $supplier->company_name }}
+                                                </option>
+                                            @endforeach
                                         </select>
                                         <div class="col-lg-2 col-sm-2 col-2 ps-0">
                                             <div class="add-icon tab">
-                                                <a href="javascript:void(0);" data-bs-toggle="modal"
-                                                    data-bs-target="#add_customer"><i data-feather="plus-circle"
-                                                        class="feather-plus-circles"></i></a>
+                                                <a href="{{ route('suppliers.create') }}"
+                                                    class="btn btn-outline-primary">
+                                                    <i data-feather="plus-circle" class="feather-plus-circles"></i>
+                                                </a>
+                                                {{-- <a href="javascript:void(0);" data-bs-toggle="modal"
+                                                    data-bs-target="#add_customer">
+                                                    <i data-feather="plus-circle" class="feather-plus-circles"></i> --}}
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -629,64 +241,74 @@
                                     <label class="form-label">Date<span class="text-danger">*</span></label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i data-feather="calendar"></i></span>
-                                        <input type="text" class="form-control datetimepicker"
-                                            placeholder="dd/mm/yyyy">
+                                        <input type="date" name="purchase_date" class="form-control" required>
                                     </div>
                                 </div>
+
                                 <div class="col-lg-4 col-md-12">
                                     <label class="form-label">Reference<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" name="reference" class="form-control" required>
                                 </div>
+
                                 <div class="col-12">
                                     <label class="form-label">Product<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" placeholder="Search Product">
-                                </div>
-                                <div class="col-12">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>Product</th>
-                                                    <th>Qty</th>
-                                                    <th>Purchase Price ($)</th>
-                                                    <th>Discount ($)</th>
-                                                    <th>Tax (%)</th>
-                                                    <th>Tax Amount ($)</th>
-                                                    <th>Unit Cost ($)</th>
-                                                    <th>Total Cost ($)</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td colspan="8" class="text-center">No Products Selected</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                    <div class="position-relative" id="product-input-wrapper" style="z-index: 1060;">
+                                        <input type="text" id="product-input" class="form-control"
+                                            placeholder="Search Product">
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <label class="form-label">Order Tax<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control">
+
+
+                                <div class="col-lg-12">
+                                    <div class="modal-body-table mt-3">
+                                        <div class="table-responsive">
+                                            <table class="table  rounded-1">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="bg-secondary-transparent p-3">Product</th>
+                                                        <th class="bg-secondary-transparent p-3">Qty</th>
+                                                        <th class="bg-secondary-transparent p-3">Purchase Price($)</th>
+                                                        <th class="bg-secondary-transparent p-3">Discount($)</th>
+                                                        {{-- <th class="bg-secondary-transparent p-3">Tax(%)</th>
+                                                        <th class="bg-secondary-transparent p-3">Tax Amount($)</th> --}}
+                                                        <th class="bg-secondary-transparent p-3">Unit Cost($)</th>
+                                                        <th class="bg-secondary-transparent p-3">Total Cost($)</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="purchase-items-table-body">
+                                                    <!-- JS will append rows here -->
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th colspan="5" class="text-end">Sub Total:</th>
+                                                        <th id="sub-total">$0.00</th>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-md-4">
+                                {{-- <div class="col-md-4">
                                     <label class="form-label">Discount<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control">
-                                </div>
+                                    <input type="number" name="discount" class="form-control" value="0"
+                                        step="any">
+                                </div> --}}
                                 <div class="col-md-4">
                                     <label class="form-label">Shipping<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control">
+                                    <input type="number" name="shipping" class="form-control" value="0"
+                                        step="any">
                                 </div>
-                                <div class="col-12">
+                                <div class="col-md-4">
                                     <label class="form-label">Status<span class="text-danger">*</span></label>
-                                    <select class="form-select">
-                                        <option>Select</option>
-                                        <option>Received</option>
-                                        <option>Pending</option>
+                                    <select class="form-select" name="status" required>
+                                        <option value="">Select</option>
+                                        <option value="Received">Received</option>
+                                        <option value="Pending">Pending</option>
                                     </select>
                                 </div>
                                 <div class="col-12">
-                                    <label class="form-label">Description</label>
-                                    <textarea class="form-control" rows="3" maxlength="600"></textarea>
+                                    <label class="form-label">Notes</label>
+                                    <textarea class="form-control" name="notes" rows="3" maxlength="600"></textarea>
                                     <small class="text-muted">Maximum 60 words</small>
                                 </div>
                             </div>
@@ -702,7 +324,7 @@
         <!-- /Add Purchase -->
 
         <!-- Add Supplier -->
-        <div class="modal fade" id="add_customer">
+        {{-- <div class="modal fade" id="add_customer">
             <div class="modal-dialog modal-dialog-centered ">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -728,7 +350,7 @@
                     </form>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- /Add Supplier -->
 
         <!-- Edit Purchase -->
@@ -1284,6 +906,119 @@
 
 
     @push('js')
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const BASE_URL = "{{ url('') }}";
+                let productInput = document.getElementById('product-input');
+                let inputWrapper = document.getElementById('product-input-wrapper');
+                let tableBody = document.getElementById('purchase-items-table-body');
+
+                let dropdown = document.createElement('div');
+                dropdown.classList.add('autocomplete-dropdown');
+                dropdown.style.position = 'absolute';
+                dropdown.style.top = '100%';
+                dropdown.style.left = '0';
+                dropdown.style.right = '0';
+                dropdown.style.zIndex = '1060';
+                inputWrapper.appendChild(dropdown);
+
+                productInput.addEventListener('input', function() {
+                    let query = this.value.trim();
+                    if (query.length < 2) {
+                        dropdown.innerHTML = '';
+                        return;
+                    }
+
+                    fetch(`${BASE_URL}/products/search?q=${query}`)
+                        .then(res => res.json())
+                        .then(products => {
+                            dropdown.innerHTML = '';
+                            if (products.length === 0) {
+                                dropdown.innerHTML = '<div class="dropdown-item">No results</div>';
+                                return;
+                            }
+
+                            products.forEach(product => {
+                                let item = document.createElement('div');
+                                item.classList.add('dropdown-item');
+                                item.textContent = product.product_name;
+                                item.style.cursor = 'pointer';
+                                item.addEventListener('mousedown', function() {
+                                    addProductRow(product);
+                                    productInput.value = '';
+                                    dropdown.innerHTML = '';
+                                });
+                                dropdown.appendChild(item);
+                            });
+                        });
+                });
+
+                document.addEventListener('click', function(e) {
+                    if (!productInput.contains(e.target) && !dropdown.contains(e.target)) {
+                        dropdown.innerHTML = '';
+                    }
+                });
+
+                function addProductRow(product) {
+                    let rowIndex = tableBody.querySelectorAll('tr').length;
+                    let row = document.createElement('tr');
+
+                    row.innerHTML = `
+        <td>${product.product_name}
+            <input type="hidden" name="items[${rowIndex}][product_id]" value="${product.id}">
+        </td>
+        <td><input type="number" name="items[${rowIndex}][qty]" class="form-control qty" value="1" min="1"></td>
+        <td><input type="number" name="items[${rowIndex}][purchase_price]" class="form-control price" value="0" step="any"></td>
+        <td><input type="number" name="items[${rowIndex}][discount]" class="form-control discount" value="0" step="any"></td>
+        <td><input type="number" name="items[${rowIndex}][unit_cost]" class="form-control unit-cost" readonly value="0"></td>
+        <td><input type="number" name="items[${rowIndex}][total]" class="form-control line-total" readonly value="0"></td>
+    `;
+
+                    tableBody.appendChild(row);
+
+                    const qtyInput = row.querySelector('.qty');
+                    const priceInput = row.querySelector('.price');
+                    const discountInput = row.querySelector('.discount');
+                    const unitCostField = row.querySelector('.unit-cost');
+                    const lineTotalField = row.querySelector('.line-total');
+
+                    function calculateRow() {
+                        const qty = parseFloat(qtyInput.value) || 0;
+                        const price = parseFloat(priceInput.value) || 0;
+                        const discount = parseFloat(discountInput.value) || 0;
+
+                        const unitCost = price - discount;
+                        const lineTotal = unitCost * qty;
+
+                        unitCostField.value = unitCost.toFixed(2);
+                        lineTotalField.value = lineTotal.toFixed(2);
+
+                        updateSubTotal();
+                    }
+
+                    [qtyInput, priceInput, discountInput].forEach(input => {
+                        input.addEventListener('input', calculateRow);
+                    });
+
+                    calculateRow();
+                }
+
+            });
+
+            function updateSubTotal() {
+                let subTotal = 0;
+                const lineTotals = document.querySelectorAll('.line-total');
+
+                lineTotals.forEach(input => {
+                    const lineAmount = parseFloat(input.value) || 0;
+                    subTotal += lineAmount;
+                });
+
+                document.getElementById('sub-total').textContent = `$${subTotal.toFixed(2)}`;
+            }
+        </script>
+
+
         <!-- Select2 JS -->
         <script src="{{ asset('assets/plugins/select2/js/select2.min.js') }}" type="text/javascript"></script>
 

@@ -20,6 +20,11 @@ class SupplierController extends Controller
         return view('app.supplier.view', compact('suppliers'));
     }
 
+    public function create()
+    {
+        return view('app.purchase.supplier'); // or wherever your separate view file is
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -33,7 +38,7 @@ class SupplierController extends Controller
             // 'image' => 'required|image|max:2048'
         ]);
 
-         // Prepare customer object
+        // Prepare customer object
         $suppliers = new Supplier();
         $suppliers->company_name = $validated['company_name'];
         $suppliers->email = $request->last_name ?? '';
@@ -77,7 +82,14 @@ class SupplierController extends Controller
             }
         }
 
+
+
         $suppliers->save();
+
+        // 👇 Conditional redirect
+        if ($request->input('redirect_from') === 'supplier_form') {
+            return redirect()->route('purchase')->with('success', 'Supplier added Successfully Now you can Add your Purchase');
+        }
 
         return back()->with('success', 'Supplier added Successfully');
     }
@@ -110,7 +122,7 @@ class SupplierController extends Controller
         // $suppliers->status = $request->status ?? '';
         $suppliers->status = $request->has('addstatus') ? 1 : 0;
 
-       // Handle image upload
+        // Handle image upload
         if ($request->hasFile('image')) {
             $image = $request->file('image');
 

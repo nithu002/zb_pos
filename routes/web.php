@@ -115,23 +115,21 @@ Route::post('unit/update', [UnitController::class, 'update'])->name('unit.update
 Route::post('unit/filterByStatus', [UnitController::class, 'filterByStatus'])->name('unit.filterByStatus');
 Route::post('unit/destroy', [UnitController::class, 'destroy'])->name('unit.destroy');
 
-<<<<<<< HEAD
-// Location Routes
-=======
->>>>>>> c45b1915ca0fe2c5002d5dc26966eb97a528d6de
-
-
-
 // Purchase Routes
 
 Route::get('purchase', [PurchaseController::class,'index'])->name(  'purchase');
+Route::post('/purchases', [PurchaseController::class, 'store'])->name('purchases.store');
+Route::get('/products/search', [PurchaseController::class, 'searchProducts'])->name('products.search');
+// Route::get('/suppliers/add', [SupplierController::class, 'create'])->name('supplier.view');
+Route::get('/purchase/suppliers/create', [SupplierController::class, 'create'])->name('suppliers.create');
+
 
 
 // PurchaseOrder Routes
 
 Route::get('purchase_order', [PurchaseOrderController::class,'index'])->name(  'purchase.order');
 
-// PurchaseRetun Route 
+// PurchaseRetun Route
 
 Route::get('purchase_return', [PurchaseReturnController::class,'index'])->name(  'purchase.return');
 
