@@ -155,28 +155,35 @@
                                                 {{ $purchase->status }}
                                             </span>
                                         </td>
-                                        <td>${{ number_format($purchase->total, 2) }}</td>
-                                        @foreach ($purchase->items as $item)
+                                        <td>${{ number_format($purchase->total) }}</td>
+                                        {{-- @forelse ($purchase->items as $item)
                                             <td>
                                                 {{ $item->qty }}
                                             </td>
-                                        @endforeach
-                                        {{-- If you have payments, replace this later --}}
+                                        @empty
+                                            <td>
+                                                0
+                                            </td>
+                                        @endforelse --}}
+                                        <td>
+                                            {{ $purchaseQtySum[$purchase->id] ?? 0 }}
+                                        </td>
 
-                                        {{-- <td>${{ number_format($purchase->total, 2) }}</td> Assuming all due --}}
-                                        {{-- <td>
-                                            <span
-                                                class="p-1 pe-2 rounded-1 {{ $purchase->status === 'Pending' ? 'text-danger bg-danger-transparent' : 'text-success bg-success-transparent' }} fs-10">
-                                                <i class="ti ti-point-filled me-1 fs-11"></i>
-                                                {{ $purchase->status === 'Pending' ? 'Unpaid' : 'Paid' }}
-                                            </span>
-                                        </td> --}}
+
                                         <td class="action-table-data">
                                             <div class="edit-delete-action">
                                                 <a class="me-2 p-2" href="#">
                                                     <i data-feather="eye" class="action-eye"></i>
                                                 </a>
-                                                <a class="me-2 p-2" data-bs-toggle="modal" data-bs-target="#edit-purchase">
+                                                <a class="me-2 p-2" data-bs-toggle="modal" data-bs-target="#edit-purchase"
+                                                    data-id="{{ $purchase->id }}"
+                                                    data-supplier="{{ $purchase->supplier_id }}"
+                                                    data-date="{{ $purchase->purchase_date }}"
+                                                    data-reference="{{ $purchase->reference }}"
+                                                    data-status="{{ $purchase->status }}"
+                                                    data-notes="{{ $purchase->notes }}" {{-- data-tax="{{ $purchase->order_tax }}" --}}
+                                                    {{-- data-discount="{{ $purchase->discount }}" --}} data-shipping="{{ $purchase->shipping }}">
+
                                                     <i data-feather="edit" class="feather-edit"></i>
                                                 </a>
                                                 <a class="p-2" data-bs-toggle="modal" data-bs-target="#delete-modal"
@@ -281,7 +288,7 @@
                                                 <tfoot>
                                                     <tr>
                                                         <th colspan="5" class="text-end">Sub Total:</th>
-                                                        <th id="sub-total">$0.00</th>
+                                                        <th id="sub">$0.00</th>
                                                     </tr>
                                                 </tfoot>
                                             </table>
@@ -323,235 +330,11 @@
         </div>
         <!-- /Add Purchase -->
 
-        <!-- Add Supplier -->
-        {{-- <div class="modal fade" id="add_customer">
-            <div class="modal-dialog modal-dialog-centered ">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <div class="page-title">
-                            <h4>Add Supplier</h4>
-                        </div>
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form action="https://dreamspos.dreamstechnologies.com/html/template/purchase-list.html">
-                        <div class="modal-body">
-                            <div>
-                                <label class="form-label">Supplier<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn me-2 btn-secondary fs-13 fw-medium p-2 px-3 shadow-none"
-                                data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary fs-13 fw-medium p-2 px-3">Add Supplier</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div> --}}
-        <!-- /Add Supplier -->
-
-        <!-- Edit Purchase -->
-        {{-- <div class="modal fade" id="edit-purchase">
-            <div class="modal-dialog purchase modal-dialog-centered ">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <div class="page-title">
-                            <h4>Edit Purchase</h4>
-                        </div>
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form action="https://dreamspos.dreamstechnologies.com/html/template/purchase-list.html">
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col-lg-4 col-md-6 col-sm-12">
-                                    <div class="mb-3 add-product">
-                                        <label class="form-label">Supplier Name<span
-                                                class="text-danger ms-1">*</span></label>
-                                        <div class="row">
-                                            <div class="col-lg-10 col-sm-10 col-10">
-                                                <select class="select">
-                                                    <option>Select</option>
-                                                    <option>Apex Computers</option>
-                                                    <option>Dazzle Shoes</option>
-                                                    <option>Best Accessories</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-lg-2 col-sm-2 col-2 ps-0">
-                                                <div class="add-icon tab">
-                                                    <a href="javascript:void(0);"><i data-feather="plus-circle"
-                                                            class="feather-plus-circles"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 col-sm-12">
-                                    <div class="mb-3">
-                                        <label class="form-label">Date<span class="text-danger ms-1">*</span></label>
-
-                                        <div class="input-groupicon calender-input">
-                                            <i data-feather="calendar" class="info-img"></i>
-                                            <input type="text" class="datetimepicker form-control p-2"
-                                                placeholder="24 Dec 2024">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-sm-12">
-                                    <div class="mb-3">
-                                        <label class="form-label">Supplier<span class="text-danger ms-1">*</span></label>
-                                        <input type="text" class="form-control" value="Elite Retail">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="mb-3">
-                                        <label class="form-label">Product<span class="text-danger ms-1">*</span></label>
-                                        <input type="text" class="form-control" placeholder="Search Product">
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="modal-body-table">
-                                        <div class="table-responsive">
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="bg-secondary-transparent p-3">Product Name</th>
-                                                        <th class="bg-secondary-transparent p-3">QTY</th>
-                                                        <th class="bg-secondary-transparent p-3">Purchase Price($) </th>
-                                                        <th class="bg-secondary-transparent p-3">Discount($) </th>
-                                                        <th class="bg-secondary-transparent p-3">Tax %</th>
-                                                        <th class="bg-secondary-transparent p-3">Tax Amount($)</th>
-                                                        <th class="text-end bg-secondary-transparent p-3">Unit Cost($)</th>
-                                                        <th class="text-end bg-secondary-transparent p-3">Total Cost ($)
-                                                        </th>
-
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td class="p-4">
-                                                            <div class="d-flex align-items-center">
-                                                                <a href="javascript:void(0);"
-                                                                    class="avatar avatar-md me-2">
-                                                                    <img src="assets/img/products/stock-img-02.png"
-                                                                        alt="product">
-                                                                </a>
-                                                                <a href="javascript:void(0);">Nike Jordan</a>
-                                                            </div>
-                                                        </td>
-                                                        <td class="p-4">
-                                                            <div class="product-quantity">
-                                                                <span class="quantity-btn">+<i data-feather="plus-circle"
-                                                                        class="plus-circle"></i></span>
-                                                                <input type="text" class="quntity-input"
-                                                                    value="10">
-                                                                <span class="quantity-btn"><i data-feather="minus-circle"
-                                                                        class="feather-search"></i></span>
-                                                            </div>
-                                                        </td>
-                                                        <td class="p-4">300</td>
-                                                        <td class="p-4">50</td>
-                                                        <td class="p-4">0</td>
-                                                        <td class="p-4">0.00</td>
-                                                        <td class="p-4">300</td>
-                                                        <td class="p-4">600</td>
-
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12 float-md-right">
-                                    <div class="total-order m-2 mb-3 ms-auto">
-                                        <ul class="border-1 rounded-1">
-                                            <li class="border-0 border-bottom">
-                                                <h4 class="border-0">Order Tax</h4>
-                                                <h5>$ 0.00</h5>
-                                            </li>
-                                            <li class="border-0 border-bottom">
-                                                <h4 class="border-0">Discount</h4>
-                                                <h5>$ 0.00</h5>
-                                            </li>
-                                            <li class="border-0 border-bottom">
-                                                <h4 class="border-0">Shipping</h4>
-                                                <h5>$ 0.00</h5>
-                                            </li>
-                                            <li class="total border-0">
-                                                <h4 class="border-0">Grand Total</h4>
-                                                <h5>$1800.00</h5>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-3 col-md-6 col-sm-12">
-                                    <div class="mb-3">
-                                        <label class="form-label">Order Tax<span class="text-danger ms-1">*</span></label>
-                                        <input type="text" class="form-control" value="0">
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-sm-12">
-                                    <div class="mb-3">
-                                        <label class="form-label">Discount<span class="text-danger ms-1">*</span></label>
-                                        <input type="text" class="form-control" value="0">
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-sm-12">
-                                    <div class="mb-3">
-                                        <label class="form-label">Shipping<span class="text-danger ms-1">*</span></label>
-                                        <input type="text" class="form-control" value="0">
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6 col-sm-12">
-                                    <div class="mb-3">
-                                        <label class="form-label">Status<span class="text-danger ms-1">*</span></label>
-                                        <select class="select">
-                                            <option>Select</option>
-                                            <option>Received</option>
-                                            <option>Pending</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-
-                                <div class="col-lg-12">
-                                    <div class="mb-3 summer-description-box">
-                                        <label class="form-label">Description</label>
-                                        <div id="summernote2">
-
-                                        </div>
-                                        <p class="mt-1">Maximum 60 Words</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn me-2 btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Save Changes </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div> --}}
-
-
-
 
 
         <!-- Edit Purchase -->
         <div class="modal fade" id="edit-purchase" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-dialog modal-fullscreen modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title">Edit Purchase</h4>
@@ -559,17 +342,25 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form>
+                    <form id="editPurchaseForm" method="POST"
+                        action="{{ route('purchases.update', ['purchase' => '__ID__']) }}">
+                        @csrf
+                        @method('PUT')
+                        {{-- <input type="hidden" name="discount" value="0"> <!-- Ensure this exists --> --}}
+
                         <div class="modal-body" style="max-height:70vh; overflow-y:auto;">
                             <div class="row g-3">
+
+                                {{-- Supplier --}}
                                 <div class="col-lg-4 col-md-6">
-                                    <label class="form-label">Supplier Name<span class="text-danger">*</span></label>
+                                    <label class="form-label">Supplier Name <span class="text-danger">*</span></label>
                                     <div class="input-group">
-                                        <select class="form-select">
-                                            <option>Select</option>
-                                            <option selected>Apex Computers</option>
-                                            <option>Dazzle Shoes</option>
-                                            <option>Best Accessories</option>
+                                        <select class="form-select" name="supplier_id">
+                                            <option value="">Select</option>
+                                            @foreach ($suppliers as $supplier)
+                                                <option value="{{ $supplier->id }}">{{ $supplier->company_name }}
+                                                </option>
+                                            @endforeach
                                         </select>
                                         <button class="btn btn-outline-secondary" data-bs-toggle="modal"
                                             data-bs-target="#add_customer" type="button">
@@ -577,227 +368,113 @@
                                         </button>
                                     </div>
                                 </div>
-                                <div class="col-lg-4 col-md-6">
-                                    <label class="form-label">Date<span class="text-danger">*</span></label>
+
+                                {{-- Date --}}
+                                {{-- <div class="col-lg-4 col-md-6">
+                                    <label class="form-label">Date <span class="text-danger">*</span></label>
                                     <div class="input-groupicon calender-input">
                                         <i data-feather="calendar" class="info-img"></i>
-                                        <input type="text" class="datetimepicker form-control p-2"
-                                            placeholder="24 Dec 2024">
+                                        <input type="text" name="purchase_date"
+                                            class="datetimepicker form-control p-2">
+                                    </div>
+                                </div> --}}
+
+                                <div class="col-lg-4 col-md-6">
+                                    <label class="form-label">Date<span class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i data-feather="calendar"></i></span>
+                                        <input type="date" name="purchase_date" class="form-control" required>
                                     </div>
                                 </div>
+
+
+                                {{-- Reference --}}
                                 <div class="col-lg-4 col-md-12">
-                                    <label class="form-label">Reference<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" value="Elite Retail">
+                                    <label class="form-label">Reference <span class="text-danger">*</span></label>
+                                    <input type="text" name="reference" class="form-control">
                                 </div>
 
+                                {{-- Search Product --}}
+                                {{-- <div id="edit-product-input-wrapper" class="col-12">
+                                    <label class="form-label">Search Product</label>
+                                    <input type="text" class="form-control" name="product_search"
+                                        id="edit-product-input" placeholder="Search Product">
+                                </div> --}}
                                 <div class="col-12">
                                     <label class="form-label">Product<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" placeholder="Search Product">
+                                    <div class="position-relative" id="edit-product-input-wrapper"
+                                        style="z-index: 1060;">
+                                        <input type="text" id="edit-product-input" class="form-control"
+                                            name="product_search" placeholder="Search Product">
+                                    </div>
                                 </div>
 
+                                {{-- Dynamic Product Table --}}
                                 <div class="col-12">
                                     <div class="table-responsive">
                                         <table class="table table-bordered">
                                             <thead>
                                                 <tr>
-                                                    <th class="bg-secondary-transparent p-3">Product Name</th>
-                                                    <th class="bg-secondary-transparent p-3">QTY</th>
-                                                    <th class="bg-secondary-transparent p-3">Purchase Price($) </th>
-                                                    <th class="bg-secondary-transparent p-3">Discount($) </th>
-                                                    <th class="bg-secondary-transparent p-3">Tax %</th>
-                                                    <th class="bg-secondary-transparent p-3">Tax Amount($)</th>
-                                                    <th class="text-end bg-secondary-transparent p-3">Unit Cost($)</th>
-                                                    <th class="text-end bg-secondary-transparent p-3">Total Cost ($)
-                                                    </th>
-
+                                                    <th>Product Name</th>
+                                                    <th>QTY</th>
+                                                    <th>Purchase Price ($)</th>
+                                                    <th>Discount ($)</th>
+                                                    <th>Unit Cost ($)</th>
+                                                    <th>Total Cost ($)</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <div class="d-flex align-items-center">
-                                                            <a href="javascript:void(0);" class="avatar avatar-md me-2">
-                                                                <img src="assets/img/products/stock-img-02.png"
-                                                                    alt="product" />
-                                                            </a>
-                                                            <a href="javascript:void(0);">Nike Jordan</a>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="product-quantity">
-                                                            <span class="quantity-btn">+<i data-feather="plus-circle"
-                                                                    class="plus-circle"></i></span>
-                                                            <input type="text" class="quntity-input" value="10">
-                                                            <span class="quantity-btn"><i data-feather="minus-circle"
-                                                                    class="feather-search"></i></span>
-                                                        </div>
-                                                    </td>
-                                                    <td class="p-4">300</td>
-                                                    <td class="p-4">50</td>
-                                                    <td class="p-4">0</td>
-                                                    <td class="p-4">0.00</td>
-                                                    <td class="p-4">300</td>
-                                                    <td class="p-4">600</td>
-                                                </tr>
+                                            <tbody id="editPurchaseItems">
+                                                {{-- Filled by JS --}}
                                             </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th colspan="5" class="text-end">Sub Total:</th>
+                                                    <th id="sub-totals">$0.00</th>
+                                                </tr>
+                                            </tfoot>
                                         </table>
                                     </div>
                                 </div>
 
+                                {{-- Shipping --}}
                                 <div class="col-md-4">
-                                    <label class="form-label">Order Tax<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" value="0" />
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="form-label">Discount<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" value="0" />
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="form-label">Shipping<span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" value="0" />
+                                    <label class="form-label">Shipping</label>
+                                    <input type="text" name="shipping" class="form-control" value="0">
                                 </div>
 
+                                {{-- Status --}}
                                 <div class="col-12">
-                                    <label class="form-label">Status<span class="text-danger">*</span></label>
-                                    <select class="form-select">
-                                        <option>Select</option>
-                                        <option selected>Received</option>
-                                        <option>Pending</option>
+                                    <label class="form-label">Status <span class="text-danger">*</span></label>
+                                    <select name="status" class="form-select">
+                                        <option value="">Select</option>
+                                        <option value="Received">Received</option>
+                                        <option value="Pending">Pending</option>
                                     </select>
                                 </div>
 
+                                {{-- Description / Notes --}}
                                 <div class="col-12">
-                                    <label class="form-label">Description</label>
-                                    <textarea class="form-control" rows="3" maxlength="600"></textarea>
+                                    <label class="form-label">Notes</label>
+                                    <textarea name="notes" class="form-control" rows="3" maxlength="600"></textarea>
                                     <small class="text-muted">Maximum 60 words</small>
                                 </div>
                             </div>
                         </div>
+
                         <div class="modal-footer">
                             <button type="button" class="btn me-2 btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Save Changes </button>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
                         </div>
                     </form>
+
+
                 </div>
             </div>
         </div>
 
         <!-- /Edit Purchase -->
 
-        <!-- Import Purchase -->
-        {{-- <div class="modal fade" id="view-notes">
-            <div class="modal-dialog modal-dialog-centered ">
-                <div class="modal-content">
-                    <div class="page-wrapper-new p-0">
-                        <div class="content">
-                            <div class="modal-header">
-                                <div class="page-title">
-                                    <h4>Import Purchase</h4>
-                                </div>
-                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <form action="https://dreamspos.dreamstechnologies.com/html/template/purchase-list.html">
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-sm-6 col-12">
-                                            <div class="mb-3">
-                                                <label class="form-label">Supplier Name<span
-                                                        class="text-danger ms-1">*</span></label>
-                                                <div class="row">
-                                                    <div class="col-lg-10 col-sm-10 col-10">
-                                                        <select class="select">
-                                                            <option>Select</option>
-                                                            <option>Apex Computers</option>
-                                                            <option>Apex Computers</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-lg-2 col-sm-2 col-2 ps-0">
-                                                        <div class="add-icon tab">
-                                                            <a href="javascript:void(0);" data-bs-toggle="modal"
-                                                                data-bs-target="#add_customer"><i
-                                                                    data-feather="plus-circle"
-                                                                    class="feather-plus-circles"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-sm-6 col-12">
-                                            <div class="mb-3">
-                                                <label class="form-label"> Status<span
-                                                        class="text-danger ms-1">*</span></label>
-                                                <select class="select">
-                                                    <option>Select</option>
-                                                    <option>Received</option>
-                                                    <option>Ordered</option>
-                                                    <option>Pending</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12 col-12">
-                                            <div class="row">
-                                                <div>
-                                                    <div class="modal-footer-btn download-file">
-                                                        <a href="javascript:void(0)"
-                                                            class="btn btn-submit fs-13 fw-medium">Download Sample File</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="mb-3 image-upload-down">
-                                                <label class="form-label"> Upload CSV File</label>
-                                                <div class="image-upload download">
-                                                    <input type="file">
-                                                    <div class="image-uploads">
-                                                        <img src="assets/img/download-img.png" alt="img">
-                                                        <h4>Drag and drop a <span>file to upload</span></h4>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-sm-6 col-12">
-                                            <div class="mb-3">
-                                                <label class="form-label">Order Tax<span
-                                                        class="text-danger ms-1">*</span></label>
-                                                <input type="text" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-sm-6 col-12">
-                                            <div class="mb-3">
-                                                <label class="form-label">Discount<span
-                                                        class="text-danger ms-1">*</span></label>
-                                                <input type="text" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-sm-6 col-12">
-                                            <div class="mb-3">
-                                                <label class="form-label">Shipping<span
-                                                        class="text-danger ms-1">*</span></label>
-                                                <input type="text" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 summer-description-box transfer">
-                                            <label class="form-label">Description</label>
-                                            <div id="summernote3">
-                                            </div>
-                                            <p>Maximum 60 Characters</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn me-2 btn-secondary"
-                                        data-bs-dismiss="modal">Cancel</button>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
+
 
         <div class="modal fade" id="view-notes" tabindex="-1" aria-labelledby="viewNotesLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -906,6 +583,7 @@
 
 
     @push('js')
+        {{-- Add function --}}
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 const BASE_URL = "{{ url('') }}";
@@ -964,21 +642,201 @@
                     let row = document.createElement('tr');
 
                     row.innerHTML = `
-        <td>${product.product_name}
-            <input type="hidden" name="items[${rowIndex}][product_id]" value="${product.id}">
-        </td>
-        <td><input type="number" name="items[${rowIndex}][qty]" class="form-control qty" value="1" min="1"></td>
-        <td><input type="number" name="items[${rowIndex}][purchase_price]" class="form-control price" value="0" step="any"></td>
-        <td><input type="number" name="items[${rowIndex}][discount]" class="form-control discount" value="0" step="any"></td>
-        <td><input type="number" name="items[${rowIndex}][unit_cost]" class="form-control unit-cost" readonly value="0"></td>
-        <td><input type="number" name="items[${rowIndex}][total]" class="form-control line-total" readonly value="0"></td>
-    `;
+                    <tr>
+                    <td>${product.product_name}
+                        <input type="hidden" name="items[${rowIndex}][product_id]" value="${product.id}">
+                    </td>
+                    <td><input type="number" name="items[${rowIndex}][qty]" class="form-control qty" value="1" min="1"></td>
+                    <td><input type="number" name="items[${rowIndex}][purchase_price]" class="form-control price" value="0" step="any"></td>
+                    <td><input type="number" name="items[${rowIndex}][discount]" class="form-control discount" value="0" step="any"></td>
+                    <td><input type="number" name="items[${rowIndex}][unit_cost]" class="form-control unit-cost" readonly value="0"></td>
+                    <td><input type="number" name="items[${rowIndex}][line-total]" class="form-control line-total" readonly value="0"></td>
+                    </tr>
+                        `;
 
                     tableBody.appendChild(row);
 
                     const qtyInput = row.querySelector('.qty');
                     const priceInput = row.querySelector('.price');
                     const discountInput = row.querySelector('.discount');
+                    const unitCostField = row.querySelector('.unit-cost');
+                    const lineTotalField = row.querySelector('.line-total');
+
+                    function calculateRow() {
+                        const qty = parseFloat(qtyInput.value) || 0;
+                        const price = parseFloat(priceInput.value) || 0;
+                        const discount = parseFloat(discountInput.value) || 0;
+
+                        const unitCost = price - discount;
+                        const lineTotal = unitCost * qty;
+
+                        unitCostField.value = unitCost.toFixed(2);
+                        lineTotalField.value = lineTotal.toFixed(2);
+
+                        updateSub();
+                    }
+
+                    [qtyInput, priceInput, discountInput].forEach(input => {
+                        input.addEventListener('input', calculateRow);
+                    });
+
+                    calculateRow();
+                }
+
+            });
+
+            function updateSub() {
+                let sub = 0;
+                const lineTotals = document.querySelectorAll('.line-total');
+
+                lineTotals.forEach(input => {
+                    const lineAmount = parseFloat(input.value) || 0;
+                    sub += lineAmount;
+                });
+
+                document.getElementById('sub').textContent = `$${sub.toFixed(2)}`;
+            }
+        </script>
+
+        {{-- Edit function --}}
+        <script>
+            $(document).on('click', '[data-bs-target="#edit-purchase"]', function() {
+                let $this = $(this);
+                let id = $this.data('id');
+                let form = $('#editPurchaseForm');
+
+                let action = form.attr('action').replace('__ID__', id);
+                form.attr('action', action);
+
+                form.find('select[name="supplier_id"]').val($this.data('supplier'));
+                form.find('input[name="purchase_date"]').val($this.data('date'));
+                form.find('input[name="reference"]').val($this.data('reference'));
+                form.find('select[name="status"]').val($this.data('status'));
+                form.find('textarea[name="notes"]').val($this.data('notes'));
+                form.find('input[name="shipping"]').val($this.data('shipping'));
+
+                loadPurchaseItems(id);
+            });
+
+            // Product search setup
+            document.addEventListener('DOMContentLoaded', function() {
+                const BASE_URL = "{{ url('') }}";
+                let productInput = document.getElementById('edit-product-input');
+                let inputWrapper = document.getElementById('edit-product-input-wrapper');
+                let tableBody = document.getElementById('editPurchaseItems');
+
+                let dropdown = document.createElement('div');
+                dropdown.classList.add('autocomplete-dropdown');
+                dropdown.style.position = 'absolute';
+                dropdown.style.top = '100%';
+                dropdown.style.left = '0';
+                dropdown.style.right = '0';
+                dropdown.style.zIndex = '1060';
+                inputWrapper.appendChild(dropdown);
+
+                productInput.addEventListener('input', function() {
+                    let query = this.value.trim();
+                    if (query.length < 2) {
+                        dropdown.innerHTML = '';
+                        return;
+                    }
+
+                    fetch(`${BASE_URL}/products/search?q=${query}`)
+                        .then(res => res.json())
+                        .then(products => {
+                            dropdown.innerHTML = '';
+                            if (products.length === 0) {
+                                dropdown.innerHTML = '<div class="dropdown-item">No results</div>';
+                                return;
+                            }
+
+                            products.forEach(product => {
+                                let item = document.createElement('div');
+                                item.classList.add('dropdown-item');
+                                item.textContent = product.product_name;
+                                item.style.cursor = 'pointer';
+                                item.addEventListener('mousedown', function() {
+                                    addProductRow(product);
+                                    productInput.value = '';
+                                    dropdown.innerHTML = '';
+                                });
+                                dropdown.appendChild(item);
+                            });
+                        });
+                });
+
+                document.addEventListener('click', function(e) {
+                    if (!productInput.contains(e.target) && !dropdown.contains(e.target)) {
+                        dropdown.innerHTML = '';
+                    }
+                });
+            });
+
+            function loadPurchaseItems(purchaseId) {
+                $.ajax({
+                    url: "{{ route('purchases.edit', ':id') }}".replace(':id', purchaseId),
+                    method: 'GET',
+                    success: function(items) {
+                        const tbody = $('#editPurchaseItems');
+                        tbody.empty();
+
+                        if (!items || items.length === 0) {
+                            tbody.html(
+                                `<tr><td colspan="6" class="text-center">No items found for this purchase.</td></tr>`
+                            );
+                            return;
+                        }
+
+                        let rowsHtml = '';
+                        items.forEach(item => {
+                            const productName = item.product?.product_name || 'Unnamed Product';
+
+                            rowsHtml += `
+                        <tr>
+                            <td>${productName}</td>
+                            <td>
+                                <input type="number" step="any" name="items[${item}][qty]" value="${item.qty}" class="form-control form-control-sm qty-input">
+                                <input type="hidden" name="item_id[]" value="${item.id}">
+                            </td>
+                            <td>
+                                <input type="number" step="any" name=" items[${item}][purchase_price]" value="${item.purchase_price}" class="form-control form-control-sm price-input">
+                            </td>
+                            <td>
+                                <input type="number" name="items[${item}][discount]" step="any" value="${item.discount}" class="form-control form-control-sm discount-input">
+                            </td>
+                            <td>
+                                <input type="text" name="items[${item}][unit-cost]" class="form-control form-control-sm unit-cost" readonly>
+                            </td>
+                            <td>
+                                <input type="text" name="items[${item}][line-total]" class="form-control form-control-sm line-total" readonly>
+                            </td>
+                        </tr>
+                    `;
+                        });
+
+                        tbody.html(rowsHtml);
+
+                        if (window.feather) {
+                            feather.replace();
+                        }
+
+                        attachEditCalculations();
+                    },
+                    error: function(xhr) {
+                        console.error("Error fetching items:", xhr);
+                        alert('Failed to load purchase items.');
+                    }
+                });
+            }
+
+            function attachEditCalculations() {
+                const rows = document.querySelectorAll('#editPurchaseItems tr');
+
+                rows.forEach(row => {
+
+                    const qtyInput = row.querySelector('.qty-input');
+                    const priceInput = row.querySelector('.price-input');
+                    const discountInput = row.querySelector('.discount-input');
                     const unitCostField = row.querySelector('.unit-cost');
                     const lineTotalField = row.querySelector('.line-total');
 
@@ -1001,9 +859,10 @@
                     });
 
                     calculateRow();
-                }
+                });
 
-            });
+                updateSubTotal();
+            }
 
             function updateSubTotal() {
                 let subTotal = 0;
@@ -1014,7 +873,51 @@
                     subTotal += lineAmount;
                 });
 
-                document.getElementById('sub-total').textContent = `$${subTotal.toFixed(2)}`;
+                document.getElementById('sub-totals').textContent = `$${subTotal.toFixed(2)}`;
+            }
+
+            function addProductRow(product) {
+                const tbody = document.getElementById('editPurchaseItems');
+                let rowIndex = tbody.querySelectorAll('tr').length;
+
+                let row = document.createElement('tr');
+                row.innerHTML = `
+            <td>${product.product_name}
+                <input type="hidden" name="items[${rowIndex}][product_id]" value="${product.id}">
+            </td>
+            <td><input type="number" name="items[${rowIndex}][qty]" class="form-control form-control-sm qty-input" value="1" min="1"></td>
+            <td><input type="number" name="items[${rowIndex}][purchase_price]" class="form-control form-control-sm price-input" value="0" step="any"></td>
+            <td><input type="number" name="items[${rowIndex}][discount]" class="form-control form-control-sm discount-input" value="0" step="any"></td>
+            <td><input type="text" name="items[${rowIndex}][unit_cost]" class="form-control form-control-sm unit-cost" readonly value="0"></td>
+            <td><input type="text" name="items[${rowIndex}][total]" class="form-control form-control-sm line-total" readonly value="0"></td>
+        `;
+                tbody.appendChild(row);
+
+                const qtyInput = row.querySelector('.qty-input');
+                const priceInput = row.querySelector('.price-input');
+                const discountInput = row.querySelector('.discount-input');
+                const unitCostField = row.querySelector('.unit-cost');
+                const lineTotalField = row.querySelector('.line-total');
+
+                function calculateRow() {
+                    const qty = parseFloat(qtyInput.value) || 0;
+                    const price = parseFloat(priceInput.value) || 0;
+                    const discount = parseFloat(discountInput.value) || 0;
+
+                    const unitCost = price - discount;
+                    const lineTotal = unitCost * qty;
+
+                    unitCostField.value = unitCost.toFixed(2);
+                    lineTotalField.value = lineTotal.toFixed(2);
+
+                    updateSubTotal();
+                }
+
+                [qtyInput, priceInput, discountInput].forEach(input => {
+                    input.addEventListener('input', calculateRow);
+                });
+
+                calculateRow();
             }
         </script>
 

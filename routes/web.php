@@ -124,6 +124,8 @@ Route::get('/products/search', [PurchaseController::class, 'searchProducts'])->n
 // Route::get('/suppliers/add', [SupplierController::class, 'create'])->name('supplier.view');
 Route::get('/purchase/suppliers/create', [SupplierController::class, 'create'])->name('suppliers.create');
 
+Route::put('/purchases/{purchase}', [PurchaseController::class, 'update'])->name('purchases.update');
+Route::get('/purchases/{id}/items', [PurchaseController::class, 'getItems'])->name('purchases.edit');
 
 
 // PurchaseOrder Routes
